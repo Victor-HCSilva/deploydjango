@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Portal do paciente{% endblock %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/style_portal_do_paciente.css' %}">
+<script src="{% static 'js/js_portal_do_paciente.js' %}" defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'images/portal_do_paciente_icon.png' %}" alt="home" width="30" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Sair</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div id="div-ola-name" style="text-indent: 60px;">
+    <strong><p>Olá, {{ name }}</p></strong>
+</div>
+
+<div class="titulo_portal_do_paciente">
+    <div class="titulo">
+        <h1>Portal do paciente</h1>
+    </div>
+</div>
+
+<div class="main">
+  <div class="container">
+    <nav class="nav nav-tabs" id="myTab" role="tablist">
+      <a class="nav-link active" id="suas-consultas-tab" data-bs-toggle="tab" href="#suas_consultas" role="tab" aria-controls="suas_consultas" aria-selected="true">Suas consultas</a>
+      <a class="nav-link" id="lista-de-medicos-tab" data-bs-toggle="tab" href="#lista_de_medicos" role="tab" aria-controls="lista_de_medicos" aria-selected="false">Médicos disponíveis</a>
+      <a class="nav-link" id="paciente-tab" data-bs-toggle="tab" href="#paciente" role="tab" aria-controls="paciente" aria-selected="false">Meus dados</a>
+      <a class="nav-link" id="imc-tab" data-bs-toggle="tab" href="#imc" role="tab" aria-controls="imc" aria-selected="false">Calcular IMC</a>
+      <a class="nav-link" href="{% url 'agendar_consulta' id=paciente.id %}">Agendar nova consulta</a>
+      {% if paciente.is_staff %}
+        <a class="nav-link" href="{% url 'cadastro_de_medicos' id=paciente.id %}">Adicionar médico(a)</a>
+        <a class="nav-link" href="{% url 'gestao_de_pacientes' id=paciente.id %}">Gerenciar pacientes</a>
+      {% endif %}
+    </nav>
+    
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="suas_consultas" role="tabpanel" aria-labelledby="suas-consultas-tab">
+          <h3>Consultas marcadas</h3>
+          <br>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Nome do médico(a)</th>
+                <th>Especialidade</th>
+                <th>Data da consulta</th>
+                <th>Horário da consulta</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for agendamento in agendamentos %}
+                {% if agendamento.paciente.id == paciente.id %}
+                  <tr>
+                    <td>{{ agendamento.medico.nome }}</td>
+                    <td>{{ agendamento.medico.especialidade }}</td>
+                    <td>{{ agendamento.data | date:'d/m/Y'}}</td>
+                    <td>{{ agendamento.hora|date:"H:i" }}</td>
+                  </tr>
+                  {% endif %}
+                {% empty %}
+                    <tr>
+                      <td colspan="4">Nenhuma consulta agendada.</td>
+                    </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+  
+        <div class="tab-pane fade" id="lista_de_medicos" role="tabpanel" aria-labelledby="lista-de-medicos-tab">
+          <h3>Médicos disponíveis</h3>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Especialidade</th>
+                <th>CRM</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if medicos %}
+                {% for medico in medicos %}
+                  <tr>
+                    <td>{{ medico.nome }}</td>
+                    <td>{{ medico.especialidade }}</td>
+                    <td>{{ medico.crm }}</td>
+                  </tr>
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td colspan="3">Sem médicos cadastrados</td>
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+  
+        <div class="tab-pane fade" id="paciente" role="tabpanel" aria-labelledby="paciente-tab">
+            <h3>Seus dados</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Data de nascimento</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ paciente.nome|title }}</td>
+                        <td>{{ paciente.data_de_nascimento | date:'d/m/Y' }}</td>
+                        <td>{{ paciente.email }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="tab-pane fade" id="imc" role="tabpanel" aria-labelledby="imc-tab">
+            <div id="z">
+                <div>
+                    <label for="number">Peso</label>
+                    <input id="peso" type="number">
+                        <br>
+                    <label for="number">Altura</label>
+                    <input id="altura" type="number">
+                    <br>
+                    <button class="btn-imc" onclick="calcularIMC()">Calcular</button>
+                    <span id="resultado"></span>
+                </div>    
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

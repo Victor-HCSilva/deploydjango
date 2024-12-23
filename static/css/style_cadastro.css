@@ -1,0 +1,49 @@
+*{
+  font-size: 1.2rem;
+}
+header{
+  opacity: 0.8;
+}
+.navbar-nav > li > a {
+  color: white;
+  border-radius: 6px;
+  transition: background-color 1s;
+}
+
+/* Estilos para os links da navbar quando o mouse está sobre eles */
+.navbar-nav > li > a:hover {
+  background-color: rgb(0, 100, 150);
+  color: white;
+}
+/*Para telas menores, o link é centralizado*/
+.nav-link{
+  text-align: center;
+}
+
+h1{  
+  text-align: center; 
+  color: black;
+}
+
+.container{
+  opacity: 0.8;
+  margin-top: 20px;
+  border-radius: 6px;
+  
+}
+
+.div-link {
+  color: white;
+  text-decoration: none;
+  background-color: gray;
+  padding: 5px ;
+  border-radius:6px;
+}
+
+.div-link:hover {
+  transition: 1s;
+  background-color: rgb(0, 100, 150); 
+
+}
+
+

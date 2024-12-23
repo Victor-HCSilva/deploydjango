@@ -1,0 +1,102 @@
+/* Estilos gerais para todos os tamanhos de tela */
+body {
+  background-color: white;
+  background-size: cover;
+  background-position: center;
+}
+
+/*------------HEADER----------------------------*/
+header {
+  align-items: end !important;
+  display: block;
+  opacity: 0.8;
+}
+
+/* Estilos para os links da navbar */
+.navbar-nav > li > a {
+    color: white;
+    border-radius: 6px;
+    transition: background-color 1s;
+    padding: 0.5rem 1rem; /* Adicionado padding para espaçamento em telas menores */
+    margin: 0.2rem; /* Adicionado margem para melhor visualização */
+}
+
+/* Estilos para os links da navbar quando o mouse está sobre eles */
+.navbar-nav > li > a:hover {
+  background-color: rgb(0, 100, 150);
+  color: white;
+}
+
+h1 {
+  text-align: center;
+}
+
+input {
+  border-radius: 6px;
+  padding: 0.5rem; /* Adicionado padding para melhor toque em telas menores */
+  margin-bottom: 0.5rem; /* Adicionado margem para espaçamento */
+}
+
+#z {
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+}
+
+#z > div {
+  text-align: center; /* Centraliza o texto dentro da div */
+}
+
+.btn-imc {
+  background-color: royalblue;
+  color: aliceblue;
+  border-radius: 6px;
+  padding: 0.5rem 1rem; /* Adicionado padding para melhor toque em telas menores */
+  margin-top: 0.5rem; /* Adicionado margem para espaçamento */
+}
+
+.btn-imc:hover {
+  transition: 1s;
+  color: royalblue;
+  background-color: aliceblue;
+}
+
+
+/* Para telas pequenas (smartphones) */
+@media (max-width: 576px) {
+    body {
+        font-size: 1.6rem; /* Fonte um pouco menor em telas pequenas */
+    }
+    .navbar-nav > li > a {
+        font-size: 0.9rem; /* Font menor para não quebrar a barra de navegação*/
+        padding: 0.4rem 0.8rem; /* Espaçamento menor em telas menores */
+        margin: 0.1rem;
+    }
+}
+/* Para telas médias (tablets) */
+@media (min-width: 577px) and (max-width: 991px) {
+  body {
+    font-size: 2rem; /* Fonte maior para tablets */
+    
+  }
+   .navbar-nav > li > a {
+
+       font-size: 2rem;/* Font menor para não quebrar a barra de navegação*/
+        padding: 0.6rem 1rem; /* Ajustando o padding para tablets */
+        margin: 0.1rem;
+  }
+
+}
+
+/* Para telas grandes (desktops) */
+@media (min-width: 992px) {
+  body {
+    font-size: 1.2rem; /* Fonte para desktops */
+  }
+}
+
+/* Para telas muito grandes (desktops maiores) */
+@media (min-width: 1200px) {
+  body {
+      font-size: 1.3rem; /* Fonte ainda maior para telas grandes */
+    }
+  }

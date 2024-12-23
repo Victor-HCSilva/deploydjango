@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+  <link rel="stylesheet" href="{% static 'css/style_login.css' %}">
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img style="border-radius: 100%;" src="https://cdn-icons-png.flaticon.com/512/100/100470.png" alt="home" width="30" height="30">        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'cadastro' %}">Cadastre-se</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'home' %}">Voltar</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main">
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+
+    
+    <div class="container-login">
+      <strong><h2>Login</h2></strong>
+      
+    <br>
+      <form class="form" method="post">{% csrf_token %} 
+        <label for="cpf">CPF</label>
+          <input id="cpf" type="text" name="cpf">
+          <br>
+          <label for="password">Senha</label>
+          <input id="password" type="password" name='password'>
+          <br>
+        <button class="button-login">Entrar</button>  
+      </form>
+    </div>
+
+    <div>
+      {% comment %}
+      <a href="">Esqueceu a senha?</a>
+      {% endcomment %}
+      
+    </div>
+  </main>
+    
+  <script>
+  function formatarCPF(cpf) {
+    // Remove caracteres não numéricos
+    cpf = cpf.replace(/[^0-9]/g, '');
+  
+    // Verifica se o CPF tem 11 dígitos
+    if (cpf.length !== 11) {
+      return cpf; // Retorna o CPF sem formatação se não tiver 11 dígitos
+    }
+  
+    // Formata o CPF: xxx.xxx.xxx-xx
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+  }
+  
+  // Exemplo de uso:
+  const inputCPF = document.querySelector("#cpf");
+  
+  inputCPF.addEventListener('input', function() {
+    this.value = formatarCPF(this.value);
+  });
+          </script>
+
+{% endblock %}

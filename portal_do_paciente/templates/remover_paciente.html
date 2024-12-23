@@ -1,0 +1,9 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/style_remover_paciente.css' %}">
+<h1>Remover Paciente</h1>
+<p>Você tem certeza que deseja remover o paciente {{ paciente.nome }}?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Remover</button>
+    

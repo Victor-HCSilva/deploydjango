@@ -1,0 +1,16 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style_editar.css' %}">
+<h1>Edição de Paciente</h1>
+
+{% if erro %}
+    <div class="alert alert-danger">{{ erro }}</div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- Renderiza o formulário como parágrafos -->
+    <button type="submit">Salvar Alterações</button>
+</form>
+
+<p>ID do Paciente: {{ paciente.id }}</p>  <!-- Exibe o ID do paciente -->
+<!-- Adicione aqui outros campos que desejar exibir do paciente -->

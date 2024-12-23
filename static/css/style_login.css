@@ -1,0 +1,92 @@
+* {
+  color: black;
+  font-size: 1.2rem;
+  font-family: sans-serif;
+  box-sizing: border-box; /* Garante que padding e border não afetem a largura total */
+}
+
+body {
+  background-color: royalblue;
+  background-size: cover;
+  background-position: center;
+  margin: 0; /* Remove margem padrão do body */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Estilos para o header */
+header {
+  opacity: 0.8;
+  color: white;
+}
+
+/* Estilos para os links da navbar */
+.navbar-nav > li > a {
+  color: white;
+  border-radius: 6px;
+  transition: background-color 1s;
+}
+
+/* Estilos para os links da navbar quando o mouse está sobre eles */
+.navbar-nav > li > a:hover {
+  background-color: rgb(0, 100, 150);
+  color: white;
+}
+
+/*Para telas menores, o link é centralizado*/
+.nav-link {
+  text-align: center;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1; /* Garante que o main cresça para ocupar o espaço disponível, importante para centralizar verticalmente */
+  padding: 20px; /* Adicionado padding para responsividade em telas menores */
+  box-sizing: border-box;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+.container-login {
+  text-align: center;
+  padding: 30px;
+  border: 2px solid rgb(0, 100, 150);
+  background-color: gray;
+  border-radius: 15px;
+  width: 80%;  /* Largura responsiva */
+  max-width: 500px;  /* Largura máxima para evitar que fique muito grande em telas maiores */
+  box-sizing: border-box;
+}
+
+#password,
+#cpf,
+label {
+  font-size: 1.5rem; /* Ajuste para melhor visualização em telas menores */
+  border-radius: 10px;
+  padding: 8px; /* Ajustado para melhor visualização */
+  display: block;
+  width: 100%; /* Faz o input ocupar toda a largura do contêiner */
+  margin: 10px 0;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: royalblue;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 20px; /* Ajustado para melhor visualização e espaçamento */
+  border: none; /* Removido a borda padrão */
+  cursor: pointer; /* Indica que o botão é interativo */
+  font-size: 1.2rem;
+}
+
+button:hover {
+  background-color: white;
+  transition: 1s;
+  color: royalblue;
+}
