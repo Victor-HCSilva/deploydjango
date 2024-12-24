@@ -90,3 +90,13 @@ button:hover {
   transition: 1s;
   color: royalblue;
 }
+@media (min-width: 768px) { 
+  
+  .nav-link {
+    font-size: 3.4rem !important;
+  }
+  .navbar-toggler-icon{
+    width: 4em;
+    height: 4em;
+  }
+}

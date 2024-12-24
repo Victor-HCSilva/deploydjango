@@ -26,10 +26,11 @@ h1{
 }
 
 .container{
+
   opacity: 0.8;
   margin-top: 20px;
   border-radius: 6px;
-  
+  max-width: 90%;
 }
 
 .div-link {
@@ -46,4 +47,21 @@ h1{
 
 }
 
-
+@media (min-width: 768px){
+  *{
+    font-size: 1.7rem;
+  }
+  .container{
+    max-width: 100%;
+  }
+}
+@media (min-width: 768px){
+  *{
+    font-size: 1.7rem;
+  }
+}
+@media (min-width: 1200px){
+  *{
+    font-size: 1.2rem;
+  }
+}

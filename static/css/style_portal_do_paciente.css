@@ -60,39 +60,35 @@ input {
   background-color: aliceblue;
 }
 
-
+.container{
+  margin-top: 0px;
+  max-width: 90%;
+}
+.navbar-toggler-icon{
+  width: 2em;
+  height: 2em;
+}
 /* Para telas pequenas (smartphones) */
-@media (max-width: 576px) {
+@media (min-width: 768px) {
+  .container{
+    margin-top: 150px;
+    max-width: 100%;
+  }
+  
     body {
-        font-size: 1.6rem; /* Fonte um pouco menor em telas pequenas */
+        font-size: 1.9rem; /* Fonte um pouco menor em telas pequenas */
     }
     .navbar-nav > li > a {
-        font-size: 0.9rem; /* Font menor para não quebrar a barra de navegação*/
+        font-size: 3rem; /* Font menor para não quebrar a barra de navegação*/
         padding: 0.4rem 0.8rem; /* Espaçamento menor em telas menores */
         margin: 0.1rem;
     }
-}
-/* Para telas médias (tablets) */
-@media (min-width: 577px) and (max-width: 991px) {
-  body {
-    font-size: 2rem; /* Fonte maior para tablets */
-    
-  }
-   .navbar-nav > li > a {
-
-       font-size: 2rem;/* Font menor para não quebrar a barra de navegação*/
-        padding: 0.6rem 1rem; /* Ajustando o padding para tablets */
-        margin: 0.1rem;
-  }
-
+    .navbar-toggler-icon{
+      width: 4em;
+      height: 4em;
+    }
 }
 
-/* Para telas grandes (desktops) */
-@media (min-width: 992px) {
-  body {
-    font-size: 1.2rem; /* Fonte para desktops */
-  }
-}
 
 /* Para telas muito grandes (desktops maiores) */
 @media (min-width: 1200px) {
