@@ -68,6 +68,10 @@ input {
   width: 2em;
   height: 2em;
 }
+.nav-link {
+  font-size: 1.2rem !important;
+}
+
 /* Para telas pequenas (smartphones) */
 @media (min-width: 768px) {
   .container{
