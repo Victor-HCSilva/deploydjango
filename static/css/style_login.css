@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: royalblue;
+  background-color: white;
   background-size: cover;
   background-position: center;
   margin: 0; /* Remove margem padrão do body */
@@ -14,7 +14,16 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
-
+#back-link{
+  margin-top: 80px;
+  text-align: left;
+  padding: 5px;
+  font-size: 1.7rem;
+  color: blue;
+}
+#back-link:hover{
+  color: black;
+}
 /* Estilos para o header */
 header {
   opacity: 0.8;
@@ -54,7 +63,7 @@ h2 {
 
 .container-login {
   text-align: center;
-  padding: 30px;
+  padding: 10px;
   border: 2px solid rgb(0, 100, 150);
   background-color: gray;
   border-radius: 15px;
@@ -68,11 +77,14 @@ h2 {
 label {
   font-size: 1.5rem; /* Ajuste para melhor visualização em telas menores */
   border-radius: 10px;
-  padding: 8px; /* Ajustado para melhor visualização */
+  padding: 4px; /* Ajustado para melhor visualização */
   display: block;
   width: 100%; /* Faz o input ocupar toda a largura do contêiner */
-  margin: 10px 0;
+  margin:  0px;
   box-sizing: border-box;
+}
+input{
+  background-color: aliceblue;
 }
 
 button {
@@ -85,18 +97,26 @@ button {
   font-size: 1.2rem;
 }
 
-button:hover {
+.container-login > button:hover {
   background-color: white;
   transition: 1s;
   color: royalblue;
 }
-.nav-link {
-  font-size: 1.2rem !important;
-}
+
 @media (min-width: 768px) { 
   
   .nav-link {
     font-size: 3.4rem;
+  }
+  .navbar-toggler-icon{
+    width: 4em;
+    height: 4em;
+  }
+}
+@media (min-width: 1200px) { 
+  
+  .nav-link {
+    font-size: 1.2rem ;
   }
   .navbar-toggler-icon{
     width: 4em;
