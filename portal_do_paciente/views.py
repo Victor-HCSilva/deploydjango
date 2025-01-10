@@ -24,7 +24,10 @@ def portal_do_paciente(request, id):
     try:
         FIRST_NAME =  paciente.nome.split()[0].title()
     except:
-        FIRST_NAME =  "Not found"
+        if paciente.is_staff == True:
+            FIRST_NAME = 'ADM'
+        else:
+            FIRST_NAME =  "Not found"
     
     #A fazer ...
     IS_ADMIN = False    
