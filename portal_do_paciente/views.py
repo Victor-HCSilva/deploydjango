@@ -11,6 +11,7 @@ from agendamentos.models import AgendamentoConsulta
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
+@login_required
 def portal_do_paciente(request, id):
     DATA = datetime.now()
 
@@ -175,7 +176,10 @@ def cadastro_de_medicos(request, id):
 
 @login_required
 def gestao_de_pacientes(request, id):
-    pacientes = Paciente.objects.all()
+    """
+    Exibe a lista de pacientes, aplica filtros, paginação, e gerencia o formulário de cadastro.
+    """
+    all_pacientes = Paciente.objects.all()
     medicos = Medico.objects.all()
     agendamentos = AgendamentoConsulta.objects.all()
 
@@ -186,6 +190,26 @@ def gestao_de_pacientes(request, id):
     
     if request.user.id != int(id):
         return redirect('login')
+
+    search_query = request.GET.get('search') or ''
+    cpf_filter = request.GET.get('cpf_search') or ''
+
+    if search_query:
+        all_pacientes = all_pacientes.filter(nome__icontains=search_query)
+    
+    if cpf_filter:
+        all_pacientes = all_pacientes.filter(cpf__icontains=cpf_filter)
+
+    
+    paginator = Paginator(all_pacientes, 5)  # Mostra 5 pacientes por página
+    page = request.GET.get('page')
+
+    try:
+        pacientes = paginator.get_page(page)
+    except PageNotAnInteger:
+        pacientes = paginator.get_page(1)
+    except EmptyPage:
+        pacientes = paginator.get_page(paginator.num_pages)
     
     if request.method == 'POST':
         form = PacienteForm(request.POST)
@@ -215,6 +239,8 @@ def gestao_de_pacientes(request, id):
             'adm': adm,
             'medicos':medicos,
             'agendamentos':agendamentos,
+            'search_query':search_query,
+             'cpf_filter': cpf_filter,
         }
 
         return redirect('portal_do_paciente', id=id)
@@ -227,6 +253,8 @@ def gestao_de_pacientes(request, id):
             'adm': adm,
             'medicos':medicos,
             'agendamentos':agendamentos,
+            'search_query':search_query,
+             'cpf_filter': cpf_filter,
         }
         return render(request, 'gerenciar_pacientes.html',context)
 
@@ -272,6 +300,7 @@ def editar_paciente(request, id_paciente, id_adm):
             }
     return render(request, 'editar_paciente.html', context)
 
+@login_required
 def remover_paciente(request, id, id_adm):
     paciente = get_object_or_404(Paciente, id=id) 
     adm = get_object_or_404(Paciente, id=id_adm)

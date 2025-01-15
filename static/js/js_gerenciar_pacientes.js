@@ -15,7 +15,12 @@ function formatarCPF(cpf) {
     
     // Exemplo de uso:
     const inputCPF = document.querySelector("#id_cpf");
+    const inputCPF_Search = document.querySelector("body > div.container.mt-3 > form > div:nth-child(2) > input")
     
     inputCPF.addEventListener('input', function() {
     this.value = formatarCPF(this.value);
+    
 });
+    inputCPF_Search.addEventListener('input', function() {
+    this.value = formatarCPF(this.value);
+    });

@@ -49,7 +49,19 @@
   </div>
   
 </div>
-
+<div class="container mt-3">
+    <form method="get" class="d-flex mb-3">
+         <div class="me-2">
+             <label for="search" class="form-label">Buscar por nome:</label>
+             <input class="form-control" type="search" placeholder="Digite o nome" name="search" value="{{ search_query }}">
+         </div>
+          <div class="me-2">
+              <label for="cpf_search" class="form-label">Buscar por CPF:</label>
+            <input class="form-control" type="search" placeholder="Digite o CPF" name="cpf_search" value="{{ cpf_filter }}">
+        </div>
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+    </form>
+</div>
 <h2 id="dados" style="text-align: center;">Dados dos pacientes</h2>
 <br>
 <div class="container">
@@ -76,6 +88,26 @@
   </div>
 
   <br>
+  
+     <div class="pagination">
+        <span class="step-links">
+            {% if pacientes.has_previous %}
+                <a href="?page=1{% if search_query %}&search={{ search_query }}{% endif %}{% if cpf_filter %}&cpf_search={{ cpf_filter }}{% endif %}">« Primeira</a>
+                <a href="?page={{ pacientes.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if cpf_filter %}&cpf_search={{ cpf_filter }}{% endif %}">Anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ pacientes.number }} de {{ pacientes.paginator.num_pages }}.
+            </span>
+
+            {% if pacientes.has_next %}
+                <a href="?page={{ pacientes.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if cpf_filter %}&cpf_search={{ cpf_filter }}{% endif %}">Próxima</a>
+                <a href="?page={{ pacientes.paginator.num_pages }}{% if search_query %}&search={{ search_query }}{% endif %}{% if cpf_filter %}&cpf_search={{ cpf_filter }}{% endif %}">Última »</a>
+            {% endif %}
+        </span>
+    </div>
+    
+    
   <h2 id="todas_as_consultas"style="text-align: center;">Todas as consultas marcadas</h2>
   <br>
   <br>
