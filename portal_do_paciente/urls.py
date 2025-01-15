@@ -4,7 +4,6 @@ from . import views_medicos
 
 urlpatterns = [
     path('<int:id>/', views.portal_do_paciente, name='portal_do_paciente'), 
-    path('<int:id>/cadastro_de_medicos/', views.cadastro_de_medicos, name='cadastro_de_medicos'),
     path('<int:id>/gestao_de_pacientes/', views.gestao_de_pacientes, name='gestao_de_pacientes'),
     path('<int:id>/gestao_de_medicos/', views_medicos.gestao_de_medicos, name='gestao_de_medicos'),
     path('<int:id>', views.agendar_consulta, name='agendar_consulta'),

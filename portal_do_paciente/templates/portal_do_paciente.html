@@ -55,7 +55,6 @@
               {% endif %}
               
               {% if paciente.is_staff %}
-                  <a class="nav-link" href="{% url 'cadastro_de_medicos' id=paciente.id %}">Adicionar médico(a)</a>
                   <a class="nav-link" href="{% url 'gestao_de_pacientes' id=paciente.id %}">Gerenciar pacientes</a>
                   <a class="nav-link" href="{% url 'gestao_de_medicos' id=paciente.id %}">Gerenciar Médicos</a>
               {% endif %}
