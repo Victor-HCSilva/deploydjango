@@ -151,13 +151,12 @@ def gestao_de_pacientes(request, id):
     agendamentos = AgendamentoConsulta.objects.all()
 
     try:
-        paciente = Paciente.objects.get(id=id)
+        adm = Paciente.objects.get(id=id)
     except Paciente.DoesNotExist:
         return redirect('cadastro')
     
     if request.user.id != int(id):
         return redirect('login')
-    
     
     if request.method == 'POST':
         form = PacienteForm(request.POST)
@@ -184,7 +183,7 @@ def gestao_de_pacientes(request, id):
         context = {
             'form': form,  # Certifique-se que 'form' está sempre no contexto
             'pacientes': pacientes,
-            'paciente': paciente,
+            'adm': adm,
             'medicos':medicos,
             'agendamentos':agendamentos,
         }
@@ -196,15 +195,21 @@ def gestao_de_pacientes(request, id):
         context = {
             'form': form,  # Certifique-se que 'form' está sempre no contexto
             'pacientes': pacientes,
-            'paciente': paciente,
+            'adm': adm,
             'medicos':medicos,
             'agendamentos':agendamentos,
         }
         return render(request, 'gerenciar_pacientes.html',context)
 
 @login_required
-def editar_paciente(request, id):
-    paciente = get_object_or_404(Paciente, id=id) # Usa get_object_or_404 para lidar com Paciente inexistente
+def editar_paciente(request, id_paciente, id_adm):
+    try:
+        paciente = get_object_or_404(Paciente, id=id_paciente) # Usa get_object_or_404 para lidar com Paciente inexistente
+        adm = get_object_or_404(Paciente, id=id_adm) # Usa get_object_or_404 para lidar com Paciente inexistente
+    except:
+        messages.error(request, 'Ocorreu um erro ao tentar realizar operação.')
+        return redirect('cadastro')
+    
     if request.method == 'POST':
         form = PacienteForm(request.POST, instance=paciente)
         if form.is_valid():
@@ -223,7 +228,7 @@ def editar_paciente(request, id):
             paciente.is_active = True
         
             paciente.save()
-            return redirect('portal_do_paciente',id=id) # Redireciona para o portal do paciente
+            return redirect('portal_do_paciente',id=id_adm) # Redireciona para o portal do paciente
         else:
             # Mensagem de erro para formulário inválido
             contexto = {'form': form, 'paciente': paciente, 'erro': 'Formulário inválido. Verifique os campos.'}
@@ -231,7 +236,11 @@ def editar_paciente(request, id):
     else:
         form = PacienteForm(instance=paciente)
 
-    context = {'form': form, 'paciente': paciente}
+    context = {
+            'form': form,
+            'paciente': paciente,
+            'ADM_ID': adm.id,
+            }
     return render(request, 'editar_paciente.html', context)
 
 def remover_paciente(request, id):

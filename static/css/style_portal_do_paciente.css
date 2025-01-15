@@ -4,7 +4,6 @@ body {
   background-size: cover;
   background-position: center;
 }
-
 /*------------HEADER----------------------------*/
 header {
   align-items: end !important;
@@ -68,12 +67,21 @@ input {
   width: 2em;
   height: 2em;
 }
-.nav-link {
-  font-size: 1.2rem ;
-}
 
+
+
+
+@media (min-width: 768px) {
+  .nav-link{   
+      font-size: 1.4rem;       
+  }
+}
 /* Para telas pequenas (smartphones) */
 @media (min-width: 768px) {
+  .nav-link{
+    
+      font-size: 2.5rem;       
+  }
   .container{
     margin-top: 150px;
     max-width: 100%;
@@ -87,16 +95,14 @@ input {
       width: 4em;
       height: 4em;
     }
-    .nav-link{
-
-      font-size: 2.5rem;
-    }
+    
 }
 
 
 /* Para telas muito grandes (desktops maiores) */
+
 @media (min-width: 1200px) {
-  body {
-      font-size: 1.3rem; /* Fonte ainda maior para telas grandes */
-    }
+  .nav-link{   
+      font-size: 1.4rem;       
   }
+}

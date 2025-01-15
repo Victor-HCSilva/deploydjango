@@ -20,8 +20,8 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">  
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'portal_do_paciente' id=paciente.id%}">Voltar </a>
-            <a class="nav-link" href="{% url 'cadastro_de_medicos' id=paciente.id%}">Cadastre um novo medico </a>
+            <a class="nav-link" href="{% url 'portal_do_paciente' id=adm.id%}">Voltar </a>
+            <a class="nav-link" href="{% url 'cadastro_de_medicos' id=adm.id%}">Cadastre um novo medico </a>
             {% comment %}
             <a class="nav-link" href=#>Guia rápido</a>
             {% endcomment %}
@@ -38,18 +38,21 @@
 <br>
 
 
-<div class="menu">
-  <a href="#dados">Dados</a>
-  
-  <a href="#todas_as_consultas">Todas as consultas</a>
-  
-  <a href="#cadastro">Cadastro</a>
+<div class="container">
+  <div class="menu">
+    <a href="#dados">Dados</a>
+    
+    <a href="#todas_as_consultas">Todas as consultas</a>
+    
+    <a href="#cadastro">Cadastro</a>
+    
+  </div>
   
 </div>
 
 <h2 id="dados" style="text-align: center;">Dados dos pacientes</h2>
 <br>
-<div class="container-fluid">
+<div class="container">
   <div class="flex-container">
     {% for paciente_ in pacientes %}
       <div class="flex-item">
@@ -65,7 +68,7 @@
           {% if paciente_.is_staff %}
             <p style="color:red">Funcionário (a)</p>
           {% endif %}
-          <a class="editar" href="{% url 'editar_paciente' paciente_.id %}">Editar dados</a>
+          <a class="editar" href="{% url 'editar_paciente' id_paciente=paciente_.id id_adm=adm.id %}">Editar dados</a>
           <a class="editar" href="{% url 'remover_paciente' paciente_.id %}">Remover</a>
         {% endif %}
       </div>
@@ -76,7 +79,7 @@
   <h2 id="todas_as_consultas"style="text-align: center;">Todas as consultas marcadas</h2>
   <br>
   <br>
-  <div class="flex-container">
+  <div class="flex-container container" >
     {% if agendamentos %}
     {% for agendamento in agendamentos %}
       <div class="flex-item">
@@ -103,7 +106,7 @@
       <h2 id="cadastro" style="text-align: center;">Cadastre um novo paciente</h2>
   </div>
   
-  <div class="row justify-content-center">  <!-- Centraliza o formulário -->
+  <div class="container">  <!-- Centraliza o formulário -->
       <div class="col-md-6" id="div-form-cadastro">  <!-- Define a largura máxima do formulário em telas médias -->
           <form method="POST" class="form-group">
               {% csrf_token %}
