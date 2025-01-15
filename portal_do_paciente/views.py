@@ -1,6 +1,6 @@
 from pacientes.models import Paciente
 from pacientes.forms import PacienteForm
-from medicos.models import Medico
+from medicos.models import Medico, Especialidade
 from medicos.forms import MedicoForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect,get_object_or_404
@@ -9,28 +9,43 @@ from django.contrib import messages
 from django.contrib.auth import logout,login
 from agendamentos.models import AgendamentoConsulta
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from django.db.models import Q
 
 def portal_do_paciente(request, id):
     DATA = datetime.now()
 
-    # Verifique se o usuário tem permissão para acessar os dados do paciente
-    if request.user.id != int(id):  # Converta o id para inteiro e compare
-        return redirect('login')  # Redirecione para a página de login
+    if request.user.id != int(id):
+        return redirect('login')
 
-    paciente = Paciente.objects.get(id=int(id))  # Obtenha o paciente
-    medicos_list = Medico.objects.all()  # Obtém todos os médicos
+    paciente = Paciente.objects.get(id=int(id))
 
-    # Configuração da paginação
-    paginator = Paginator(medicos_list, 5)  # Mostra 5 médicos por página
-    page = request.GET.get('page')  # Obtém o número da página da URL
+    # Obter termos de pesquisa
+    search_term = request.GET.get('search', '')
+    specialty_term = request.GET.get('specialty', '')
+
+    medicos_query = Medico.objects.all()
+
+    # Aplicar filtro por nome
+    if search_term:
+        medicos_query = medicos_query.filter(
+            Q(nome__icontains=search_term)
+        )
+    
+    # Aplicar filtro por especialidade
+    if specialty_term:
+      medicos_query = medicos_query.filter(
+            Q(especialidade__nome__icontains=specialty_term)
+        )
+
+    paginator = Paginator(medicos_query, 5)
+    page = request.GET.get('page')
 
     try:
-        medicos = paginator.page(page) # Obtem a pagina desejada
+        medicos = paginator.page(page)
     except PageNotAnInteger:
-        medicos = paginator.page(1) # Se não for inteiro, exibe a primeira
+        medicos = paginator.page(1)
     except EmptyPage:
-        medicos = paginator.page(paginator.num_pages) # Se for maior que o limite, exibe a ultima pagina
+        medicos = paginator.page(paginator.num_pages)
 
     agendamentos = AgendamentoConsulta.objects.all()
 
@@ -41,21 +56,23 @@ def portal_do_paciente(request, id):
             FIRST_NAME = 'ADM'
         else:
             FIRST_NAME =  "Not found"
+    
+    specialties = Especialidade.objects.all()
 
-    #A fazer ...
     IS_ADMIN = False
 
-    #Variaves passadas ao template
     context = {
-        'paciente': paciente,  # Adicione o objeto paciente ao contexto
-        'data':DATA, # Data
+        'paciente': paciente,
+        'data':DATA,
         'admin': IS_ADMIN,
         'name': FIRST_NAME,
-        'medicos':medicos,  # Agora, 'medicos' é uma página do paginator
+        'medicos': medicos,
         'agendamentos':agendamentos,
+        'search_term': search_term,
+        'specialty_term':specialty_term,
+        'specialties':specialties,
     }
     return render(request, 'portal_do_paciente.html', context)
-
 
 @login_required
 def agendar_consulta(request, id):
