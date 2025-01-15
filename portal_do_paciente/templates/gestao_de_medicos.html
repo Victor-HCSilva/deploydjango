@@ -1,83 +1,118 @@
 <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Médicos</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    </head>
-    <body>
-        <div class="container">
-            <h1>Médicos</h1>
-            <form method="get" class="mb-3">
-                <div class="row">
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="search_cpf" placeholder="Buscar por CPF" value="{{ search_term }}">
-                    </div>
-                     <div class="col-md-2">
-                        <button type="submit" class="btn btn-primary">Pesquisar</button>
-                    </div>
+<html>
+<head>
+    <title>Médicos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <a class="nav-link" href="{% url 'portal_do_paciente' id=id %}">Voltar</a>
+        <h1>Médicos</h1>
+        
+        <form method="get" class="mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="search_cpf" placeholder="Buscar por CPF" value="{{ search_term }}">
                 </div>
-            </form>
-            <h2>Adicionar Médico</h2>
-                <form method="post" >
-                {% csrf_token %}
-                <div class="mb-3">
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">Pesquisar</button>
+                </div>
+            </div>
+            
+            <h2>Lista de Médicos</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Data de Nascimento</th>
+                <th scope="col">CPF</th>
+                <th scope="col">CRM</th>
+                <th scope="col">Especialidade</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for medico in medicos %}
+            <tr>
+                <td>{{ medico.nome }}</td>
+                <td>{{ medico.email }}</td>
+                <td>{{ medico.data_de_nascimento|date:"d/m/Y" }}</td>
+                <td>{{ medico.cpf }}</td>
+                <td>{{ medico.crm }}</td>
+                <td>{{ medico.especialidade }}</td>
+                <td><a href="{% url 'editar_medico' id_medico=medico.id id_adm=id %}">Editar</a></td>
+                <td><a href="{% url 'remover_medico' id_medico=medico.id id_adm=id %}">Excluir</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="pagination">
+            <span class="step-links">
+                {% if medicos.has_previous %}
+                    <a href="?page=1{% if search_term %}&search_cpf={{search_term}}{% endif %}">« Primeira</a>
+                    <a href="?page={{ medicos.previous_page_number }}{% if search_term %}&search_cpf={{search_term}}{% endif %}">Anterior</a>
+                {% endif %}
+        
+                <span class="current">
+                    Página {{ medicos.number }} de {{ medicos.paginator.num_pages }}.
+                </span>
+        
+                {% if medicos.has_next %}
+                    <a href="?page={{ medicos.next_page_number }}{% if search_term %}&search_cpf={{search_term}}{% endif %}">Próxima</a>
+                    <a href="?page={{ medicos.paginator.num_pages }}{% if search_term %}&search_cpf={{search_term}}{% endif %}">Última »</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <br>
+        </form class="container">
+        <h2 class="text-center">Adicionar Médico</h2>
+        <form method="post" class="container">
+            {% csrf_token %}
+            <div class="mb-3">
+                 <div class="mb-3">
                     {{ form.nome.label_tag }}
                     {{ form.nome }}
-                    
+                    </div>
+                
+                 <div class="mb-3">
                     {{ form.email.label_tag }}
                     {{ form.email }}
-                    
-                    {{ form.data_de_nascimento.label_tag }}
-                    {{ form.data_de_nascimento }}
-                    
+                    </div>
+
+                 <div class="mb-3">
+                   {{ form.data_de_nascimento.label_tag }}
+                   {{ form.data_de_nascimento }}
+                 </div>
+
+                 <div class="mb-3">
                     {{ form.cpf.label_tag }}
                     {{ form.cpf }}
+                 </div>
 
+                  <div class="mb-3">
                     {{ form.crm.label_tag }}
                     {{ form.crm }}
+                  </div>
 
-                    {{ form.especialidade.label_tag }}
+                 <div class="mb-3">
+                     {{ form.especialidade.label_tag }}
                     {{ form.especialidade }}
-                    
-                    {{ form.password.label_tag }}
+                 </div>
+                    <br>
+
+                 <div class="mb-3">
+                     {{ form.password.label_tag }}
                     {{ form.password }}
-                    
-                </div>
-                <button type="submit" class="btn btn-primary">Salvar</button>
-            </form>
-            <br>
-            <h2>Lista de Médicos</h2>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Data de Nascimento</th>
-                    <th scope="col">CPF</th>
-                    <th scope="col">CRM</th>
-                    <th scope="col">Especialidade</th>
-                    <th scope="col">Alterar dados</th>
-                    <th scope="col">Excluir</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for medico in medicos %}
-                <tr>
-                    <td>{{ medico.nome }}</td>
-                    <td>{{ medico.email }}</td>
-                    <td>{{ medico.data_de_nascimento }}</td>
-                    <td>{{ medico.cpf }}</td>
-                    <td>{{ medico.crm }}</td>
-                    <td>{{ medico.especialidade }}</td>
-                    
-                    <td><a class="nav-link" href="#">Alterar</a></td>
-                    <td><a class="nav-link" href="#">Excluir</a></td>
-                    
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
-    </html>
+                    </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+        <br>
+        
+    <br>
+</body>
+</html>
