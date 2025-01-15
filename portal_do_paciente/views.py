@@ -10,16 +10,28 @@ from django.contrib.auth import logout,login
 from agendamentos.models import AgendamentoConsulta
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-@login_required
+
 def portal_do_paciente(request, id):
     DATA = datetime.now()
-    
+
     # Verifique se o usuário tem permissão para acessar os dados do paciente
     if request.user.id != int(id):  # Converta o id para inteiro e compare
         return redirect('login')  # Redirecione para a página de login
-    
+
     paciente = Paciente.objects.get(id=int(id))  # Obtenha o paciente
-    medicos = Medico.objects.all()
+    medicos_list = Medico.objects.all()  # Obtém todos os médicos
+
+    # Configuração da paginação
+    paginator = Paginator(medicos_list, 5)  # Mostra 5 médicos por página
+    page = request.GET.get('page')  # Obtém o número da página da URL
+
+    try:
+        medicos = paginator.page(page) # Obtem a pagina desejada
+    except PageNotAnInteger:
+        medicos = paginator.page(1) # Se não for inteiro, exibe a primeira
+    except EmptyPage:
+        medicos = paginator.page(paginator.num_pages) # Se for maior que o limite, exibe a ultima pagina
+
     agendamentos = AgendamentoConsulta.objects.all()
 
     try:
@@ -29,9 +41,9 @@ def portal_do_paciente(request, id):
             FIRST_NAME = 'ADM'
         else:
             FIRST_NAME =  "Not found"
-    
+
     #A fazer ...
-    IS_ADMIN = False    
+    IS_ADMIN = False
 
     #Variaves passadas ao template
     context = {
@@ -39,12 +51,11 @@ def portal_do_paciente(request, id):
         'data':DATA, # Data
         'admin': IS_ADMIN,
         'name': FIRST_NAME,
-        'medicos':medicos,
+        'medicos':medicos,  # Agora, 'medicos' é uma página do paginator
         'agendamentos':agendamentos,
     }
     return render(request, 'portal_do_paciente.html', context)
 
-from datetime import datetime
 
 @login_required
 def agendar_consulta(request, id):
