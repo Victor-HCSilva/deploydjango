@@ -69,7 +69,7 @@
             <p style="color:red">Funcionário (a)</p>
           {% endif %}
           <a class="editar" href="{% url 'editar_paciente' id_paciente=paciente_.id id_adm=adm.id %}">Editar dados</a>
-          <a class="editar" href="{% url 'remover_paciente' paciente_.id %}">Remover</a>
+          <a class="editar" href="{% url 'remover_paciente' id=paciente_.id id_adm=adm.id %}">Remover</a>
         {% endif %}
       </div>
     {% endfor %}

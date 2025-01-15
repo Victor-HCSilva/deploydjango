@@ -1,6 +1,7 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'css/style_remover_paciente.css' %}">
+<a href="{% url 'gestao_de_pacientes' id=adm.id %}">voltar</a>
 <h1>Remover Paciente</h1>
 <p>Você tem certeza que deseja remover o paciente {{ paciente.nome }}?</p>
 <form method="post">

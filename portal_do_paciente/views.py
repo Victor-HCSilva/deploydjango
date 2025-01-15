@@ -8,6 +8,7 @@ from datetime import datetime,time
 from django.contrib import messages
 from django.contrib.auth import logout,login
 from agendamentos.models import AgendamentoConsulta
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 @login_required
 def portal_do_paciente(request, id):
@@ -243,14 +244,21 @@ def editar_paciente(request, id_paciente, id_adm):
             }
     return render(request, 'editar_paciente.html', context)
 
-def remover_paciente(request, id):
+def remover_paciente(request, id, id_adm):
     paciente = get_object_or_404(Paciente, id=id) 
+    adm = get_object_or_404(Paciente, id=id_adm)
+
     if request.method=="POST":
         paciente.delete() 
-        return redirect('portal_do_paciente', id=id)
+        messages.success(request, "Consulta agendada com sucesso!")
+        return redirect('portal_do_paciente', id=id_adm)
     else:
             # Mensagem de erro para formulário inválido
-        contexto = {'paciente': paciente, 'erro': 'Formulário inválido. Verifique os campos.'}
-        return render(request, 'remover_paciente.html', contexto) # Renderiza a mesma página com os erros
+        context = {'paciente': paciente,
+                     'erro': 'Formulário inválido. Verifique os campos.',
+                     'adm': adm,
+                     }
+        return render(request, 'remover_paciente.html',context
+                      ) # Renderiza a mesma página com os erros
 
 
