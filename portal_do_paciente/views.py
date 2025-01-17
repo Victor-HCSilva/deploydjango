@@ -193,6 +193,9 @@ def gestao_de_pacientes(request, id):
 
     search_query = request.GET.get('search') or ''
     cpf_filter = request.GET.get('cpf_search') or ''
+    medico_cpf_filter = request.GET.get('medico_cpf_search') or ''
+    paciente_cpf_filter = request.GET.get('paciente_cpf_search') or ''
+
 
     if search_query:
         all_pacientes = all_pacientes.filter(nome__icontains=search_query)
@@ -210,7 +213,15 @@ def gestao_de_pacientes(request, id):
     except EmptyPage:
         pacientes = pacientes_paginator.get_page(pacientes_paginator.num_pages)
 
-    # Paginação de agendamentos
+    # Filtro e Paginação de agendamentos
+    if medico_cpf_filter:
+      all_agendamentos = all_agendamentos.filter(medico__cpf__icontains=medico_cpf_filter)
+
+    if paciente_cpf_filter:
+        all_agendamentos = all_agendamentos.filter(paciente__cpf__icontains=paciente_cpf_filter)
+
+
+
     agendamentos_paginator = Paginator(all_agendamentos, 5) # Define quantos agendamentos por página
     agendamentos_page = request.GET.get('agendamentos_page')  # Novo parâmetro para a página de agendamentos
     try:
@@ -240,8 +251,10 @@ def gestao_de_pacientes(request, id):
             'adm': adm,
             'medicos':medicos,
             'agendamentos': agendamentos,
-            'search_query': search_query,
+             'search_query': search_query,
              'cpf_filter': cpf_filter,
+              'medico_cpf_filter':medico_cpf_filter,
+            'paciente_cpf_filter': paciente_cpf_filter,
         }
 
         return redirect('portal_do_paciente', id=id)
@@ -254,11 +267,12 @@ def gestao_de_pacientes(request, id):
             'adm': adm,
             'medicos':medicos,
             'agendamentos': agendamentos,
-            'search_query': search_query,
-             'cpf_filter': cpf_filter,
+            'search_query':search_query,
+            'cpf_filter': cpf_filter,
+             'medico_cpf_filter':medico_cpf_filter,
+            'paciente_cpf_filter': paciente_cpf_filter,
         }
         return render(request, 'gerenciar_pacientes.html',context)
-
 
 @login_required
 def editar_paciente(request, id_paciente, id_adm):
