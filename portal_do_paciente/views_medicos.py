@@ -6,36 +6,49 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect,get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
-
+from django.http import Http404  # Importe Http404
 
 @login_required
 def gestao_de_medicos(request, id):
-
-    if request.user.id != int(id):
+    # Autenticação e Autorização
+    if not request.user.is_authenticated:
         return redirect('login')
-    
+
+    try:
+        user_id = int(id)
+    except (ValueError, TypeError):
+        raise Http404("ID de usuário inválido")
+
+    if request.user.id != user_id:
+        return redirect('login')
+
     medicos = Medico.objects.all()
-    search_term = request.GET.get('search_cpf','') #Obtém o parametro 'search_cpf' via GET
+    search_term = request.GET.get('search_cpf', '')
 
     if search_term:
-      medicos = medicos.filter(cpf__icontains=search_term) #Filtrar por CPF, icontains para pesquisa não case-sensitive
+        medicos = medicos.filter(cpf__icontains=search_term)
 
-    #Configuração da paginação
+    # Configuração da Paginação
     page = request.GET.get('page', 1)
-    paginator = Paginator(medicos, 5) # Mostra 5 médicos por página
+    paginator = Paginator(medicos, 5)
+
     try:
         medicos = paginator.page(page)
     except PageNotAnInteger:
-        medicos = paginator.page(1) # Se a página não for um inteiro, mostra a primeira página
+        medicos = paginator.page(1)
     except EmptyPage:
-        medicos = paginator.page(paginator.num_pages)  # Se a página estiver vazia, mostra a última página
-
+        medicos = paginator.page(paginator.num_pages)
 
     if request.method == 'POST':
         form = MedicoForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('portal_do_paciente', id=id)  # Redireciona para a mesma página após salvar
+            medico_salvo = form.save() 
+            messages.success(request, 'Médico salvo com sucesso.')
+            return redirect('portal_do_paciente', id=id) # Redireciona para o portal do paciente com o id do médico
+        else:
+            print(form.errors)
+            
+
     else:
         form = MedicoForm()
 
@@ -43,7 +56,7 @@ def gestao_de_medicos(request, id):
         'medicos': medicos,
         'form': form,
         'search_term': search_term,
-        'id':id,
+        'id': id,
     }
     return render(request, 'gestao_de_medicos.html', context)
 

@@ -181,7 +181,7 @@ def gestao_de_pacientes(request, id):
     """
     all_pacientes = Paciente.objects.all()
     medicos = Medico.objects.all()
-    agendamentos = AgendamentoConsulta.objects.all()
+    all_agendamentos = AgendamentoConsulta.objects.all()  # Obtém todos os agendamentos
 
     try:
         adm = Paciente.objects.get(id=id)
@@ -200,46 +200,47 @@ def gestao_de_pacientes(request, id):
     if cpf_filter:
         all_pacientes = all_pacientes.filter(cpf__icontains=cpf_filter)
 
-    
-    paginator = Paginator(all_pacientes, 5)  # Mostra 5 pacientes por página
-    page = request.GET.get('page')
-
+    # Paginação de pacientes
+    pacientes_paginator = Paginator(all_pacientes, 5)
+    pacientes_page = request.GET.get('pacientes_page')  # Use um parâmetro diferente para evitar conflito
     try:
-        pacientes = paginator.get_page(page)
+        pacientes = pacientes_paginator.get_page(pacientes_page)
     except PageNotAnInteger:
-        pacientes = paginator.get_page(1)
+        pacientes = pacientes_paginator.get_page(1)
     except EmptyPage:
-        pacientes = paginator.get_page(paginator.num_pages)
+        pacientes = pacientes_paginator.get_page(pacientes_paginator.num_pages)
+
+    # Paginação de agendamentos
+    agendamentos_paginator = Paginator(all_agendamentos, 5) # Define quantos agendamentos por página
+    agendamentos_page = request.GET.get('agendamentos_page')  # Novo parâmetro para a página de agendamentos
+    try:
+        agendamentos = agendamentos_paginator.get_page(agendamentos_page)
+    except PageNotAnInteger:
+        agendamentos = agendamentos_paginator.get_page(1)
+    except EmptyPage:
+        agendamentos = agendamentos_paginator.get_page(agendamentos_paginator.num_pages)
     
     if request.method == 'POST':
         form = PacienteForm(request.POST)
         if form.is_valid():
-            paciente = form.save(commit=False)  # Cria o objeto Paciente, mas não salva ainda
-            
-            # Define a senha usando set_password
+            paciente = form.save(commit=False)
             paciente.set_password(form.cleaned_data['password'])
-
-            # Define a data de nascimento corretamente
             paciente.data_de_nascimento = form.cleaned_data['data_de_nascimento']
-                
-                # Salva o paciente no banco de dados
             paciente.is_staff = False
             paciente.is_superuser = False
-            paciente.is_active = True
-        
+            paciente.is_active = True        
             paciente.save()
             messages.success(request, 'Paciente cadastrado com sucesso!')
-
         else:
             messages.error(request, 'ocorreu um erro no formulário!')
-
+    
         context = {
-            'form': form,  # Certifique-se que 'form' está sempre no contexto
+            'form': form,
             'pacientes': pacientes,
             'adm': adm,
             'medicos':medicos,
-            'agendamentos':agendamentos,
-            'search_query':search_query,
+            'agendamentos': agendamentos,
+            'search_query': search_query,
              'cpf_filter': cpf_filter,
         }
 
@@ -248,15 +249,16 @@ def gestao_de_pacientes(request, id):
     elif request.method == 'GET':
         form = PacienteForm(request.POST)
         context = {
-            'form': form,  # Certifique-se que 'form' está sempre no contexto
+            'form': form,
             'pacientes': pacientes,
             'adm': adm,
             'medicos':medicos,
-            'agendamentos':agendamentos,
-            'search_query':search_query,
+            'agendamentos': agendamentos,
+            'search_query': search_query,
              'cpf_filter': cpf_filter,
         }
         return render(request, 'gerenciar_pacientes.html',context)
+
 
 @login_required
 def editar_paciente(request, id_paciente, id_adm):

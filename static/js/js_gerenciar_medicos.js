@@ -21,6 +21,7 @@ function formatarCPF(cpf) {
     this.value = formatarCPF(this.value);
     
 });
-    inputCPF_Search.addEventListener('input', function() {
+
+    /*inputCPF_Search.addEventListener('input', function() {
     this.value = formatarCPF(this.value);
-    });
+    });*/

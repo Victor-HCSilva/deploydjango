@@ -42,24 +42,27 @@
     <div class="main">
       <div class="container">
           <nav class="nav nav-tabs" id="myTab" role="tablist">
-              <a class="nav-link active" id="lista-de-medicos-tab" data-bs-toggle="tab" href="#lista_de_medicos"
-                 role="tab" aria-controls="lista_de_medicos" aria-selected="true">Médicos disponíveis</a>
+              
               
               
                  {% if not paciente.is_staff %}
+                 <a class="nav-link active" id="lista-de-medicos-tab" data-bs-toggle="tab" href="#lista_de_medicos"
+                 role="tab" aria-controls="lista_de_medicos" aria-selected="true">Médicos disponíveis</a>
                  <a class="nav-link" id="suas-consultas-tab" data-bs-toggle="tab" href="#suas_consultas" role="tab"
                  aria-controls="suas_consultas" aria-selected="false">Suas consultas</a>
               <a class="nav-link" id="paciente-tab" data-bs-toggle="tab" href="#paciente" role="tab"
                  aria-controls="paciente" aria-selected="false">Meus dados</a>
+                 
                  <a class="nav-link" href="{% url 'agendar_consulta' id=paciente.id %}">Agendar nova consulta</a>
+                 <a class="nav-link" id="imc-tab" data-bs-toggle="tab" href="#imc" role="tab" aria-controls="imc"
+                 aria-selected="false">Calcular IMC</a>
               {% endif %}
               
               {% if paciente.is_staff %}
-                  <a class="nav-link" href="{% url 'gestao_de_pacientes' id=paciente.id %}">Gerenciar pacientes</a>
-                  <a class="nav-link" href="{% url 'gestao_de_medicos' id=paciente.id %}">Gerenciar Médicos</a>
+                  <a class="nav-link" href="{% url 'gestao_de_pacientes' id=paciente.id %}">Pacientes</a>
+                  <a class="nav-link" href="{% url 'gestao_de_medicos' id=paciente.id %}">Médicos</a>
               {% endif %}
-              <a class="nav-link" id="imc-tab" data-bs-toggle="tab" href="#imc" role="tab" aria-controls="imc"
-                 aria-selected="false">Calcular IMC</a>
+              
           </nav>
     
           <div class="tab-content" id="myTabContent">

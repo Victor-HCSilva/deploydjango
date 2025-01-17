@@ -26,7 +26,7 @@ def home(request):
     }
     return render(request, 'home.html')
 
-def _login_(request):
+def login_(request):
     
     """
     View para efetuar o login de um paciente.

@@ -7,7 +7,7 @@ url_name = name_url.const_names_urls
 
 urlpatterns = [
     path('<int:id>/', views.portal_do_paciente,
-        name=url_name['portal_do_paciente']), 
+        name=url_name['portal_do_paciente']),
 
     path('<int:id>/gestao_de_pacientes/',
         views.gestao_de_pacientes,
@@ -17,7 +17,7 @@ urlpatterns = [
         views_medicos.gestao_de_medicos,
         name=url_name['gestao_de_medicos']),
 
-    path('<int:id>', views.agendar_consulta, 
+    path('<int:id>/agendarConsulta', views.agendar_consulta, 
         name=url_name['agendar_consulta']),
 
     path('logout/', views.logout_view, 

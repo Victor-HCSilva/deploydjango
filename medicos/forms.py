@@ -1,5 +1,6 @@
 from django import forms
-from .models import Medico, Especialidade
+from .models import Medico
+from . import tratamento
 
 class MedicoForm(forms.ModelForm):
     class Meta:
@@ -12,12 +13,21 @@ class MedicoForm(forms.ModelForm):
             'crm': forms.TextInput(attrs={'class': 'form-control'}),
             'nome': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            #Adicione outros widgets se necessario
-
         }
         labels = {
             'cpf': 'CPF',
             'password': 'Senha',
             'crm':'CRM',
-            #Adicione outros labels se necessario
         }
+
+    def clean_cpf(self):
+        """Limpa e valida o campo CPF."""
+        cpf = self.cleaned_data.get('cpf', '')
+        print(f"CPF antes da formatação: {cpf}")  # Debug: Imprime o CPF antes
+        cpf = tratamento.formatar_cpf(cpf)
+        print(f"CPF depois da formatação: {cpf}")  # Debug: Imprime o CPF depois
+
+
+        if len(cpf) != 11 or not cpf.isdigit():
+            raise forms.ValidationError("CPF inválido. Deve conter 11 dígitos numéricos.")
+        return cpf
