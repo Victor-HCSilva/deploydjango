@@ -1,12 +1,2 @@
-.div-footer{
-    position: fixed; /* Posição fixa na tela */
-    bottom: 0; /* Posiciona na parte inferior da tela */
-    width: 100%; /* Largura total da tela */
-    padding: 20px; /* Espaçamento interno */
-    text-align: center; /* Centraliza o conteúdo */
-}
-/*Para telas menores, o link é centralizado*/
-.nav-link{
-    text-align: center;
-  }
-  
+@import url('..//const/fonts.css');
+

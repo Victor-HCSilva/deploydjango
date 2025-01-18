@@ -5,63 +5,29 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-  <link rel="stylesheet" href="{% static 'css/home/style_login.css' %}">
-
-  
-  <a id="back-link" class="nav-link" href="{% url 'cadastro' %}">Cadastre-se</a>
   <main class="main">
     {% if messages %}
     <ul class="messages">
       {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
       {% endfor %}
-      </ul>
+    </ul>
     {% endif %}
 
     
-    <div class="container-login">
-      <strong><h2>Login</h2></strong>
-      
-    <br>
-      <form class="form" method="post">{% csrf_token %} 
-        <label for="cpf">CPF</label>
+    <div class="container text-center">
+      <h2>Login</h2>
+      <form class="form" method="post">
+          {% csrf_token %} 
+          
+          <label for="cpf">CPF</label>
           <input id="cpf" type="text" name="cpf">
-          <br>
+          
           <label for="password">Senha</label>
           <input id="password" type="password" name='password'>
-          <br>
-        <button class="button-login">Entrar</button>  
+          
+          <button class="button-login">Entrar</button>  
       </form>
     </div>
-
-    <div>
-      {% comment %}
-      <a href="">Esqueceu a senha?</a>
-      {% endcomment %}
-      
-    </div>
   </main>
-    
-  <script>
-  function formatarCPF(cpf) {
-    // Remove caracteres não numéricos
-    cpf = cpf.replace(/[^0-9]/g, '');
-  
-    // Verifica se o CPF tem 11 dígitos
-    if (cpf.length !== 11) {
-      return cpf; // Retorna o CPF sem formatação se não tiver 11 dígitos
-    }
-  
-    // Formata o CPF: xxx.xxx.xxx-xx
-    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-  }
-  
-  // Exemplo de uso:
-  const inputCPF = document.querySelector("#cpf");
-  
-  inputCPF.addEventListener('input', function() {
-    this.value = formatarCPF(this.value);
-  });
-          </script>
-
 {% endblock %}

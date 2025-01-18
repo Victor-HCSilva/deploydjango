@@ -29,26 +29,26 @@
             <ul class="navbar-nav">  
               {% if user.is_staff %}
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'home_with_login' id_user=user.id %}">Início</a>
+                <a class="nav-link header_links" href="{% url 'home_with_login' id_user=user.id %}">Início</a>
               </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'gestao_de_medicos' id=user.id %}">Médicos</a>
+                  <a class="nav-link header_links" href="{% url 'gestao_de_medicos' id=user.id %}">Médicos</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'gestao_de_pacientes' id=user.id %}">Pacientes</a>
+                  <a class="nav-link header_links" href="{% url 'gestao_de_pacientes' id=user.id %}">Pacientes</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'logout' %}">Sair</a>
+                  <a class="nav-link header_links" href="{% url 'logout' %}">Sair</a>
                 </li>
               {% else %}
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'home' %}">Início</a>
+                <a class="nav-link header_links" href="{% url 'home' %}">Início</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'cadastro' %}">Cadastre-se</a>
+                <a class="nav-link header_links" href="{% url 'cadastro' %}">Cadastre-se</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
+                <a class="nav-link header_links" href="{% url 'login' %}">Login</a>
               </li>
              
               {% endif %}

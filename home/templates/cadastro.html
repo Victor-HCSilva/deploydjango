@@ -10,12 +10,12 @@
 
     
 </head>
-<body>
+<body >
    
 
 <div id="div-cadastro-voltar" class="container mt-3">
     <div id="div-voltar">
-        <a style="text-decoration: none;" href="{% url 'home' %}	" >Voltar</a>
+        <a class="link-any p_min" href="{% url 'home' %}	" >Voltar</a>
     </div>
     
 </div>
@@ -31,7 +31,7 @@
                 <form method="POST" class="form-group">
                     {% csrf_token %}
                     {{ form.as_p }}
-                     <button type="submit" class="btn btn-primary">Cadastrar</button>
+                     <button type="submit" class="btn btn-primary p_min">Cadastrar</button>
                 </form>
                 <br>
                 <br>
