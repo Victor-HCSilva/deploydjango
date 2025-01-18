@@ -68,9 +68,6 @@ input {
   height: 2em;
 }
 
-
-
-
 @media (min-width: 768px) {
   .nav-link{   
       font-size: 1.4rem;       
