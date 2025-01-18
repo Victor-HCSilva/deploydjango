@@ -286,9 +286,8 @@ class RemoverPacienteView(LoginRequiredView):
                            'adm': adm,
                            }
     def render_view(self, template_name):
-      return render(self.request, template_name, self.context
-                      ) 
-
+      return render(self.request, template_name, self.context) 
+    
 @login_required
 def remover_paciente(request, id, id_adm):
     view = RemoverPacienteView(request,id=id_adm, id_paciente=id)

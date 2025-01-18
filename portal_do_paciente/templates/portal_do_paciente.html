@@ -7,29 +7,7 @@
 <link rel="stylesheet" href="{% static 'css/portal_do_paciente/style_portal_do_paciente.css' %}">
 <script src="{% static 'js/js_portal_do_paciente.js' %}" defer></script>
 
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="{% static 'images/portal_do_paciente_icon.png' %}" alt="home" width="30" height="30">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Sair</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
+
 
 <div id="div-ola-name" style="text-indent: 60px;">
     <strong><p>Olá, {{ name }}</p></strong>

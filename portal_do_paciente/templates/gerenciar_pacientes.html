@@ -9,34 +9,7 @@
 <link rel="stylesheet" href="{% static 'css/portal_do_paciente/style_gerenciar_pacientes.css' %}">
 <script src="{% static 'js/js_gerenciar_pacientes.js' %}" defer></script>
 
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="{% static 'images/portal_do_paciente_icon.png' %}" alt="home" width="30" height="30">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'portal_do_paciente' id=adm.id%}">Voltar </a>
 
-                        {% comment %}
-                        <a class="nav-link" href=#>Guia rápido</a>
-                        {% endcomment %}
-
-                    </li>
-                    <li><a class="nav-link" href="{% url 'gestao_de_medicos' id=adm.id%}">Cadastre um novo medico </a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
-    </nav>
-</header>
 
 <h1 style="text-align: center;">Gerenciamento</h1>
 <br>

@@ -118,3 +118,11 @@ def remover_medico(request, id_medico, id_adm):
                       ) # Renderiza a mesma página com os erros
 
 
+def home_with_login(request, id_user):
+    user = get_object_or_404(Paciente, id=id_user)
+    print(user)
+    
+    context = {
+        'user': user,
+    }
+    return render(request, 'home.html', context)

@@ -7,27 +7,7 @@
 {% block content %}
   <link rel="stylesheet" href="{% static 'css/home/style_login.css' %}">
 
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <img style="border-radius: 100%;" src="https://cdn-icons-png.flaticon.com/512/100/100470.png" alt="home" width="30" height="30">        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'cadastro' %}">Cadastre-se</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'home' %}">Voltar</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
+  
   <a id="back-link" class="nav-link" href="{% url 'cadastro' %}">Cadastre-se</a>
   <main class="main">
     {% if messages %}

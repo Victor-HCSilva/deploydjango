@@ -23,6 +23,9 @@ urlpatterns = [
     path('logout/', views.logout_view, 
         name=url_name['logout']),
 
+    path('home/<int:id_user>', 
+        views_medicos.home_with_login, name=url_name['home_with_login']),
+
     path('paciente/<int:id_adm>/<int:id_paciente>/editar/', 
         views.editar_paciente, name=url_name['editar_paciente']),
 

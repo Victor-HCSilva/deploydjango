@@ -1,43 +1,17 @@
+
+{% extends 'base.html' %}
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Médicos</title>
+    {% block content %}
+    <title>{% block title %}Médicos{% endblock %}</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/portal_do_paciente/style_gerenciar_medicos.css' %}">
     <script src="{% static 'js/js_gerenciar_medicos.js' %}" defer></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-              <img src="{% static 'images/portal_do_paciente_icon.png' %}" alt="home" width="30" height="30">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">  
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'portal_do_paciente' id=id%}">Voltar </a>
-                  
-                  {% comment %}
-                  <a class="nav-link" href=#>Guia rápido</a>
-                  {% endcomment %}
-                  
-                </li>
-                <a class="nav-link" href="{% url 'gestao_de_pacientes' id=id %}">Cadastre um novo paciente </a>
-                <li>
-
-                </li>
-              </ul>
-              
-            </div>
-          </div>
-        </nav>
-      </header>
-      
+    
     <div class="container">
         {{ message }}
         <h1>Médicos</h1>
@@ -147,5 +121,4 @@
         <br>
         
     <br>
-</body>
-</html>
+    {% endblock %}

@@ -8,6 +8,7 @@ const_names_urls = {
     'remover_paciente': 'remover_paciente',
     'editar_medico': 'editar_medico',
     'remover_medico': 'remover_medico',
+    'home_with_login':'home_with_login',
 }
 
     
