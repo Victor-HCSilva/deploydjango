@@ -40,6 +40,7 @@
     background-color: var(--background_default);
   }
   
+  
   /*header*/
 .bg-dark{
   color:red;
@@ -51,6 +52,7 @@
     color: var(--color_links) !important;
     border-radius: 6px;
   }  
+
 .header_links:hover{
   transition: var(--transition);
   background-color: var(--background_links_orange_hover);

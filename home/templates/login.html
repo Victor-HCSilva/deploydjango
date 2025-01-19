@@ -17,19 +17,29 @@
     {% endif %}
 
     
-    <div class="container text-center">
-      <h2>Login</h2>
-      <form class="form" method="post">
-          {% csrf_token %} 
-          
-          <label for="cpf">CPF</label>
-          <input id="cpf" type="text" name="cpf">
-          
-          <label for="password">Senha</label>
-          <input id="password" type="password" name='password'>
-          
-          <button class="button-login">Entrar</button>  
-      </form>
-    </div>
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+          <div class="col-md-6">
+              <div class="card p-4">
+                  <h2 class="h1_max text-center mb-4">Login</h2>
+                  <form method="post">
+                      {% csrf_token %}
+
+                      <div class="form-group">
+                          <label class="h1_min" for="cpf">CPF</label>
+                          <input type="text" class="form-control p_max" id="cpf" name="cpf" placeholder="Digite seu CPF" required>
+                      </div>
+
+                      <div class="form-group">
+                          <label class="h1_min" for="password">Senha</label>
+                          <input type="password" class="form-control p_max" id="password" name="password" placeholder="Digite sua senha" required>
+                      </div>
+                  
+                      <button type="submit" class="link-any btn-primary btn-block p_max text-center">Entrar</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
   </main>
 {% endblock %}
