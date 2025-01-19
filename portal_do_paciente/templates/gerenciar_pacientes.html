@@ -30,15 +30,15 @@
     <form method="get" class="d-flex mb-3">
         <div class="me-2">
             <label for="search" class="form-label p_max">Buscar por nome:</label>
-            <input class="form-control" type="search" placeholder="Digite o nome" name="search"
-                value="{{ search_query }}">
+            <input class="form-control" type="search" placeholder="Digite o nome" name="search_pacientes"
+                value="{{ search_query_pacientes }}">
             <br>
             <button class="btn btn-sm btn-primary" type="submit">Buscar</button>
         </div>
         <div class="me-2">
             <label for="cpf_search" class="form-label p_max">Buscar por CPF:</label>
-            <input class="form-control" type="search" placeholder="Digite o CPF" name="cpf_search"
-                value="{{ cpf_filter }}">
+            <input class="form-control" type="search" placeholder="Digite o CPF" name="cpf_search_pacientes"
+                value="{{ cpf_filter_pacientes }}">
 
         </div>
         <br>
@@ -93,11 +93,9 @@
     <div class="pagination">
         <span class="step-links">
             {% if pacientes.has_previous %}
-            <a
-                href="?pacientes_page=1{% if search_query %}&search={{ search_query }}{% endif %}{% if cpf_filter %}&cpf_search={{ cpf_filter }}{% endif %}">«
+            <a href="?page=1{% if search_query_pacientes %}&search_pacientes={{ search_query_pacientes }}{% endif %}{% if cpf_filter_pacientes %}&cpf_search_pacientes={{ cpf_filter_pacientes }}{% endif %}#dados">«
                 Primeira</a>
-            <a
-                href="?pacientes_page={{ pacientes.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if cpf_filter %}&cpf_search={{ cpf_filter }}{% endif %}">Anterior</a>
+            <a href="?page={{ pacientes.previous_page_number }}{% if search_query_pacientes %}&search_pacientes={{ search_query_pacientes }}{% endif %}{% if cpf_filter_pacientes %}&cpf_search_pacientes={{ cpf_filter_pacientes }}{% endif %}#dados">Anterior</a>
             {% endif %}
 
             <span class="current">
@@ -105,10 +103,8 @@
             </span>
 
             {% if pacientes.has_next %}
-            <a
-                href="?pacientes_page={{ pacientes.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if cpf_filter %}&cpf_search={{ cpf_filter }}{% endif %}">Próxima</a>
-            <a
-                href="?pacientes_page={{ pacientes.paginator.num_pages }}{% if search_query %}&search={{ search_query }}{% endif %}{% if cpf_filter %}&cpf_search={{ cpf_filter }}{% endif %}">Última
+            <a href="?page={{ pacientes.next_page_number }}{% if search_query_pacientes %}&search_pacientes={{ search_query_pacientes }}{% endif %}{% if cpf_filter_pacientes %}&cpf_search_pacientes={{ cpf_filter_pacientes }}{% endif %}#dados">Próxima</a>
+            <a href="?page={{ pacientes.paginator.num_pages }}{% if search_query_pacientes %}&search_pacientes={{ search_query_pacientes }}{% endif %}{% if cpf_filter_pacientes %}&cpf_search_pacientes={{ cpf_filter_pacientes }}{% endif %}#dados">Última
                 »</a>
             {% endif %}
         </span>
@@ -189,8 +185,8 @@
     <div class="pagination">
     <span class="step-links">
         {% if agendamentos.has_previous %}
-            <a href="?agendamentos_page=1{% if search_query %}&search={{ search_query }}{% endif %}{% if cpf_filter %}&cpf_search={{ cpf_filter }}{% endif %}{% if medico_cpf_filter %}&medico_cpf_search={{medico_cpf_filter}}{% endif %}{% if paciente_cpf_filter %}&paciente_cpf_search={{paciente_cpf_filter}}{% endif %}#todas_as_consultas">« Primeira</a>
-            <a href="?agendamentos_page={{ agendamentos.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if cpf_filter %}&cpf_search={{ cpf_filter }}{% endif %}{% if medico_cpf_filter %}&medico_cpf_search={{medico_cpf_filter}}{% endif %}{% if paciente_cpf_filter %}&paciente_cpf_search={{paciente_cpf_filter}}{% endif %}#todas_as_consultas">Anterior</a>
+            <a href="?page=1{% if search_query_pacientes %}&search_pacientes={{ search_query_pacientes }}{% endif %}{% if cpf_filter_pacientes %}&cpf_search_pacientes={{ cpf_filter_pacientes }}{% endif %}{% if medico_cpf_filter %}&medico_cpf_search={{medico_cpf_filter}}{% endif %}{% if paciente_cpf_filter %}&paciente_cpf_search={{paciente_cpf_filter}}{% endif %}#todas_as_consultas">« Primeira</a>
+            <a href="?page={{ agendamentos.previous_page_number }}{% if search_query_pacientes %}&search_pacientes={{ search_query_pacientes }}{% endif %}{% if cpf_filter_pacientes %}&cpf_search_pacientes={{ cpf_filter_pacientes }}{% endif %}{% if medico_cpf_filter %}&medico_cpf_search={{medico_cpf_filter}}{% endif %}{% if paciente_cpf_filter %}&paciente_cpf_search={{paciente_cpf_filter}}{% endif %}#todas_as_consultas">Anterior</a>
         {% endif %}
 
         <span class="current">
@@ -198,8 +194,8 @@
         </span>
 
         {% if agendamentos.has_next %}
-            <a href="?agendamentos_page={{ agendamentos.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if cpf_filter %}&cpf_search={{ cpf_filter }}{% endif %}{% if medico_cpf_filter %}&medico_cpf_search={{medico_cpf_filter}}{% endif %}{% if paciente_cpf_filter %}&paciente_cpf_search={{paciente_cpf_filter}}{% endif %}#todas_as_consultas">Próxima</a>
-            <a href="?agendamentos_page={{ agendamentos.paginator.num_pages }}{% if search_query %}&search={{ search_query }}{% endif %}{% if cpf_filter %}&cpf_search={{ cpf_filter }}{% endif %}{% if medico_cpf_filter %}&medico_cpf_search={{medico_cpf_filter}}{% endif %}{% if paciente_cpf_filter %}&paciente_cpf_search={{paciente_cpf_filter}}{% endif %}#todas_as_consultas">Última »</a>
+            <a href="?page={{ agendamentos.next_page_number }}{% if search_query_pacientes %}&search_pacientes={{ search_query_pacientes }}{% endif %}{% if cpf_filter_pacientes %}&cpf_search_pacientes={{ cpf_filter_pacientes }}{% endif %}{% if medico_cpf_filter %}&medico_cpf_search={{medico_cpf_filter}}{% endif %}{% if paciente_cpf_filter %}&paciente_cpf_search={{paciente_cpf_filter}}{% endif %}#todas_as_consultas">Próxima</a>
+            <a href="?page={{ agendamentos.paginator.num_pages }}{% if search_query_pacientes %}&search_pacientes={{ search_query_pacientes }}{% endif %}{% if cpf_filter_pacientes %}&cpf_search_pacientes={{ cpf_filter_pacientes }}{% endif %}{% if medico_cpf_filter %}&medico_cpf_search={{medico_cpf_filter}}{% endif %}{% if paciente_cpf_filter %}&paciente_cpf_search={{paciente_cpf_filter}}{% endif %}#todas_as_consultas">Última »</a>
         {% endif %}
     </span>
 </div>
