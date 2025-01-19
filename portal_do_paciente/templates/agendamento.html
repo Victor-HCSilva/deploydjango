@@ -1,44 +1,39 @@
 {% extends 'base.html' %}
-
 {% load static %}
+
 {% block title %}Agendamento{% endblock %}
+
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/portal_do_paciente/style_agendamento.css' %}">
+    <link rel="stylesheet" href="{% static 'css/portal_do_paciente/style_agendamento.css' %}">
     <!-- Container do Formulário -->
     <div class="container mt-5">
-        <h1>Agendar Consulta</h1>
-        <form method="POST" >
+        
+        <h1 class="text-center h1_min">Agendar Consulta</h1>
+        <form method="POST">
             {% csrf_token %}
             <div class="mb-3">
-                <label for="dataConsulta" class="form-label">Data da Consulta</label>
-                <input type="date" class="form-control" id="dataConsulta" name="data_consulta" required>
+                <label for="dataConsulta" class="form-label h1_min">Data da Consulta</label>
+                <input type="date" class="form-control mini_size" id="dataConsulta" name="data_consulta" required>
             </div>
             <div class="mb-3">
-                <label for="horaConsulta" class="form-label">Hora da Consulta</label>
-                <select class="form-control" id="hora_consulta" name="hora_consulta" required>
+                <label for="horaConsulta" class="form-label h1_min">Hora da Consulta</label>
+                <select class="form-control mini_size" id="hora_consulta" name="hora_consulta" required>
                     <option value="" selected disabled>Horário</option>
                     {% for key, value in horarios.items %}
                         <option value="{{ key }}">{{ value }}</option>
                     {% endfor %}
                 </select>
-                               
-                
             </div>
             <div class="mb-3">
-                <label for="medico" class="form-label">Médico</label>
-                <select class="form-select" id="medico" name="id_medico" required>
+                <label for="medico" class="form-label h1_min">Médico</label>
+                <select class="form-select mini_size" id="medico" name="id_medico" required>
                     <option value="" selected disabled>Selecione o Médico</option>
-                    <!-- Valores preenchidos dinamicamente com Django -->
                     {% for medico in medicos %}
                         <option value="{{ medico.id }}">{{ medico.nome }} - {{ medico.especialidade }}</option>
                     {% endfor %}
                 </select>
             </div>
-
-            <button type="submit" class="btn btn-primary">Agendar Consulta</button>
+            <button type="submit" class="btn btn-primary h1_min">Agendar Consulta</button>
         </form>
     </div>
-    
-    
-
-    {% endblock %}
+{% endblock %}

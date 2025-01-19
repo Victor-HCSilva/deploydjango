@@ -1,25 +1,5 @@
-*{
-    font-size: 1.2rem;
-  }
-  header{
-    opacity: 0.8;
-  }
-  /* Estilos para os links da navbar */
-  .navbar-nav > li > a {
-    color: white;
-    border-radius: 6px;
-    transition: background-color 1s;
-  }
-  /*Para telas menores, o link é centralizado*/
-.nav-link{
-  text-align: center;
-}
+@import url('../const/fonts.css');
 
-  /* Estilos para os links da navbar quando o mouse está sobre eles */
-  .navbar-nav > li > a:hover {
-    background-color: rgb(0, 100, 150);
-    color: white;
-  }
-  
-  /* Estilos para a página */
-  
+.container{
+    max-width: var(--minimum_width);
+}

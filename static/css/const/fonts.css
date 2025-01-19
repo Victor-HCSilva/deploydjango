@@ -1,97 +1,124 @@
-:root {
-    /*texto*/
-    --h1_max: 3.2rem;
-    --h2_max: 2.3rem;
-    --p_max:1.6rem;
-    --h1_medium: 1.7rem;
-    --h2_medium: 1.4rem;
-    --p_medium:2.4rem;
-    --h1_min: 3rem; 
-    --h2_min: 2.5rem; 
-    --p_min:2rem;
-    --p_mini_size:1.5rem;
-    /*tamanho de tela*/
-    --max_width:100%;
-    --medium_width:95%;
-    --minimum_width:90%;
-    --center: center;
-    /*links*/
-    --background_links_blue:rgb(0, 100, 150);
-    --background_links_green:rgb(0, 150, 50);
-    --background_links_yellow:rgb(220, 220, 0);
-    --background_links_orange:rgb(200, 100, 0);
-    --background_links_orange_hover:rgb(164, 52, 8);
-    --color_links:white;
-    --transition:1s;
-    --link-font-default: 1.2rem;
-    /*backgrounds*/
-    --yellow: yellow;
-    --background_default: #FFFFE0;
-    --hide:none;
-    --no_hide:inline-block;
-    /*header*/
-    --background_header:orangered ;
-  }
+@import url('../const/fonts.css');
 
-
-  /*background*/
-
-  .background-default{
-    background-color: var(--background_default);
-  }
-  
-  /*header*/
-.bg-dark{
-  color:red;
-  background-color: var(--background_header) !important;
-  padding: 6px;
+.main {
+    display: flex;
+    justify-content: var(--center);
+    align-items: var(--center);
+    min-height: 100vh;
+    background-color: var(--background_default); /* Cor de fundo */
 }
 
-.header_links {
-    color: var(--color_links) !important;
-    border-radius: 6px;
-  }  
-.header_links:hover{
-  transition: var(--transition);
-  background-color: var(--background_links_orange_hover);
+.messages {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+    text-align: var(--center);
 }
-/*links*/
-.link-any{
-    background-color: var(--background_links_green);
-    color: aliceblue;
-    text-decoration: none;
-    border-radius: 6px;
-    padding: 2px;
+
+.messages li {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 4px;
 }
-.p_min{
-  font-size: var(--p_min);
+
+.messages li.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
 }
-.p_medium{
-  font-size: var(--p_medium);
+
+.login-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: var(--minimum_width); /* Faz o container responsivo*/
+    max-width: 400px; /* Limita a largura em telas maiores */
+    text-align: var(--center);
 }
-.p_max{
-  font-size: var(--p_max);
+
+.login-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: var(--h2_max); /* Usando a variável para h2 */
 }
-.h1_max{
-  font-size: var(--h1_max);
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
-.h1_min{
-  font-size: var(--h2_min);
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }
-.mini_size{
-  font-size: var(--p_mini_size);
+
+.input-group label {
+    margin-bottom: 5px;
+    color: #333;
+     font-size: var(--p_min);
 }
-.hide{
-  display: var(--hide);
+
+.input-group input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: var(--p_max); /* Usando a variável para inputs */
 }
-.no_hide{
-  display: var(--no_hide);
+
+.input-group input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
-@media (min-width: 1200px) {
-  .p_min{
+
+.login-button {
+    background: #007bff;
+    color: var(--color_links);
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: var(--link-font-default);
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background: #0056b3;
+}
+/* Responsividade para telas pequenas */
+@media screen and (max-width: 767px) {
+    .login-container {
+        width: var(--medium_width); /* Aumenta a largura em telas pequenas */
+        padding: 20px; /* Ajusta o padding */
+    }
+    .login-container h2 {
+        font-size: var(--h2_min); /* Usando a variável para h2 */
+    }
+    .input-group label {
     font-size: var(--p_mini_size);
-  } 
-  .h1_max{
-    font-size: var(--p_min);
   }
+    .input-group input {
+        font-size: var(--p_medium); /* Usando a variável para inputs */
+    }
+}
+
+@media (min-width: 1200px) {
+    .login-container {
+        width: var(--max_width); /* Aumenta a largura em telas grandes */
+    }
+    .login-container h2 {
+        font-size: var(--h1_medium); /* Usando a variável para h1 */
+    }
+     .input-group label {
+    font-size: var(--p_mini_size);
+  }
+    .input-group input {
+       font-size: var(--p_min); /* Usando a variável para inputs */
+    }
 }
