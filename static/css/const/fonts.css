@@ -44,6 +44,7 @@
 .bg-dark{
   color:red;
   background-color: var(--background_header) !important;
+  padding: 6px;
 }
 
 .header_links {
