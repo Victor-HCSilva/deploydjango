@@ -17,11 +17,11 @@
 
 <div class="container">
     <div class="menu">
-        <a href="#dados">Dados</a>
+        <a class="link-any p_max" href="#dados">Dados</a>
 
-        <a href="#todas_as_consultas">Todas as consultas</a>
+        <a class="link-any p_max" href="#todas_as_consultas">Todas as consultas</a>
 
-        <a href="#cadastro">Cadastro</a>
+        <a class="link-any p_max" href="#cadastro">Cadastro</a>
 
     </div>
 
@@ -29,14 +29,14 @@
 <div class="container mt-3">
     <form method="get" class="d-flex mb-3">
         <div class="me-2">
-            <label for="search" class="form-label">Buscar por nome:</label>
+            <label for="search" class="form-label p_max">Buscar por nome:</label>
             <input class="form-control" type="search" placeholder="Digite o nome" name="search"
                 value="{{ search_query }}">
             <br>
             <button class="btn btn-sm btn-primary" type="submit">Buscar</button>
         </div>
         <div class="me-2">
-            <label for="cpf_search" class="form-label">Buscar por CPF:</label>
+            <label for="cpf_search" class="form-label p_max">Buscar por CPF:</label>
             <input class="form-control" type="search" placeholder="Digite o CPF" name="cpf_search"
                 value="{{ cpf_filter }}">
 
@@ -53,42 +53,32 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Data de Nascimento</th>
-                        <th>CPF</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                        <th>Ações</th>
+                        <th class="special mini_size">ID</th>
+                        <th class="special mini_size">Nome</th>
+                        <th class="special mini_size">Data de Nascimento</th>
+                        <th class="mini_size">CPF</th>
+                        <th class="special mini_size">Email</th>
+                        <th class="mini_size">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for paciente_ in pacientes %}
                     {% if not paciente_.is_superuser %}
                     <tr>
-                        <td>{{ paciente_.id }}</td>
-                        <td>
+                        <td class="special">{{ paciente_.id }}</td>
+                        <td class="special">
                             {% if paciente_.nome %}
                             {{ paciente_.nome }}
                             {% else %}
                             Não informado
                             {% endif %}
                         </td>
-                        <td>{{ paciente_.data_de_nascimento | date:'d/m/Y' }}</td>
-                        <td>{{ paciente_.cpf }}</td>
-                        <td>{{ paciente_.email }}</td>
-                        <td>
-                            {% if paciente_.is_staff %}
-                            <span class="badge bg-danger">Funcionário(a)</span>
-                            {% else %}
-                            Paciente
-                            {% endif %}
-                        </td>
-                        <td>
-                            <a class="btn btn-sm btn-secondary"
-                                href="{% url 'editar_paciente' id_paciente=paciente_.id id_adm=adm.id %}">Editar</a>
-                            <a class="btn btn-sm btn-danger"
-                                href="{% url 'remover_paciente' id=paciente_.id id_adm=adm.id %}">Remover</a>
+                        <td class="special mini_size">{{ paciente_.data_de_nascimento | date:'d/m/Y' }}</td>
+                        <td class="mini_size">{{ paciente_.cpf }}</td>
+                        <td class="special">{{ paciente_.email }}</td>
+                        <td class="mini_size">
+                            <a class="btn btn-sm btn-secondary" href="{% url 'editar_paciente' id_paciente=paciente_.id id_adm=adm.id %}">Editar</a>
+                            <a class="btn btn-sm btn-danger" href="{% url 'remover_paciente' id=paciente_.id id_adm=adm.id %}">Remover</a>
                         </td>
                     </tr>
                     {% endif %}
@@ -122,6 +112,9 @@
                 »</a>
             {% endif %}
         </span>
+        <br>
+        <br>
+
     </div>
 
 
@@ -132,13 +125,13 @@
       <div class="container mt-3">
     <form method="get" class="d-flex mb-3">
         <div class="me-2">
-            <label for="medico_cpf_search" class="form-label">Buscar por CPF do Médico:</label>
-            <input class="form-control" type="search" placeholder="Digite o CPF do Médico" name="medico_cpf_search"
+            <label for="medico_cpf_search" class="form-label p_max">Buscar por CPF do Médico:</label>
+            <input class="form-control " type="search" placeholder="Digite o CPF do Médico" name="medico_cpf_search"
                 value="{{ medico_cpf_filter }}">
                 
         </div>
           <div class="me-2">
-             <label for="paciente_cpf_search" class="form-label">Buscar por CPF do Paciente:</label>
+             <label for="paciente_cpf_search" class="form-label p_max">Buscar por CPF do Paciente:</label>
              <br>
              
              <input class="form-control" type="search" placeholder="Digite o CPF do Paciente" name="paciente_cpf_search" value="{{ paciente_cpf_filter }}">
@@ -159,29 +152,29 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Médico(a)</th>
-                        <th>Paciente</th>
-                        <th>Email do Paciente</th>
-                        <th>Especialidade</th>
-                        <th>Data</th>
-                        <th>Hora</th>
+                        <th class="mini_size">Médico(a)</th>
+                        <th class="mini_size">Paciente</th>
+                        <th class="special mini_size">Email do Paciente</th>
+                        <th class="mini_size special">Especialidade</th>
+                        <th class="mini_size">Data</th>
+                        <th class="mini_size special">Hora</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for agendamento in agendamentos %}
                     <tr>
-                        <td>{{ agendamento.medico.nome }}</td>
-                        <td>
+                        <td class="mini_size">{{ agendamento.medico.nome }}</td>
+                        <td class="mini_size">
                             {% if agendamento.paciente.nome %}
                             {{ agendamento.paciente.nome }}
                             {% else %}
                             Não informado
                             {% endif %}
-                        </td>
-                        <td>{{ agendamento.paciente.email }}</td>
-                        <td>{{ agendamento.medico.especialidade }}</td>
-                        <td>{{ agendamento.data | date:'d/m/Y' }}</td>
-                        <td>{{ agendamento.hora|date:"H:i" }}</td>
+                        </td >
+                        <td class="mini_size special">{{ agendamento.paciente.email }}</td>
+                        <td class="mini_size special">{{ agendamento.medico.especialidade }}</td>
+                        <td class="mini_size">{{ agendamento.data | date:'d/m/Y' }}</td>
+                        <td class="mini_size special">{{ agendamento.hora|date:"H:i" }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -214,7 +207,7 @@
 
 <div class="container mt-5">
     <div id="div-title-cadatro">
-        <h2 id="cadastro" style="text-align: center;">Cadastre um novo paciente</h2>
+        <h2 class="text-center">Cadastre um novo paciente</h2>
     </div>
 
     <div class="container">
@@ -225,7 +218,7 @@
                 {% csrf_token %}
                 {% for field in form %}
                 <div class="form-group">
-                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                    <label for="{{ field.id_for_label }}" class="form-label p_max">{{ field.label }}</label>
                     {{ field }}
                     {% if field.errors %}
                     <ul class="errors">
@@ -236,7 +229,7 @@
                     {% endif %}
                 </div>
                 {% endfor %}
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <button type="submit" class="btn btn-primary p_medium">Cadastrar</button>
             </form>
             <br>
             <br>
