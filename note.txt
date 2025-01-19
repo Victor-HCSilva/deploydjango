@@ -1,0 +1,4 @@
+Ultima alteração (18/01/2025)
+
+E depois checar se tudo está funcionando corretamente (paginação, funções, etc).
+Por fim fazer o pull para o main e para python anywhere:))
