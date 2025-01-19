@@ -1,105 +1,72 @@
-/* Estilos gerais para todos os tamanhos de tela */
-body {
-  background-color: white;
-  background-size: cover;
-  background-position: center;
-}
-/*------------HEADER----------------------------*/
-header {
-  align-items: end !important;
-  display: block;
-  opacity: 0.8;
-}
-
-/* Estilos para os links da navbar */
-.navbar-nav > li > a {
-    color: white;
-    border-radius: 6px;
-    transition: background-color 1s;
-    padding: 0.5rem 1rem; /* Adicionado padding para espaçamento em telas menores */
-    margin: 0.2rem; /* Adicionado margem para melhor visualização */
-}
-
-/* Estilos para os links da navbar quando o mouse está sobre eles */
-.navbar-nav > li > a:hover {
-  background-color: rgb(0, 100, 150);
-  color: white;
-}
-
-h1 {
-  text-align: center;
-}
-
-input {
-  border-radius: 6px;
-  padding: 0.5rem; /* Adicionado padding para melhor toque em telas menores */
-  margin-bottom: 0.5rem; /* Adicionado margem para espaçamento */
-}
-
-#z {
-  display: flex;
-  justify-content: center; /* Centraliza o conteúdo horizontalmente */
-}
-
-#z > div {
-  text-align: center; /* Centraliza o texto dentro da div */
-}
-
-.btn-imc {
-  background-color: royalblue;
-  color: aliceblue;
-  border-radius: 6px;
-  padding: 0.5rem 1rem; /* Adicionado padding para melhor toque em telas menores */
-  margin-top: 0.5rem; /* Adicionado margem para espaçamento */
-}
-
-.btn-imc:hover {
-  transition: 1s;
-  color: royalblue;
-  background-color: aliceblue;
-}
-
+@import url('..//const/fonts.css');
+/* Estilos gerais para todo
+*/
 .container{
-  margin-top: 0px;
-  max-width: 90%;
+  max-width: var(--medium_width);
 }
-.navbar-toggler-icon{
-  width: 2em;
-  height: 2em;
+@import url("../const/fonts.css");
+/*padrão*/
+body {
+  background: var(--background_default);
 }
-
-@media (min-width: 768px) {
-  .nav-link{   
-      font-size: 1.4rem;       
+@media (min-width: 728px) {
+  
+  h1 {
+    font-size: var(--h1_min); /* Tamanho menor para mobile */
   }
-}
-/* Para telas pequenas (smartphones) */
-@media (min-width: 768px) {
+  h2 {
+      font-size: var(--h2_min); /* Tamanho menor para mobile */
+  }
+  p {
+    font-size: var(--p_min) ;
+  }
   .nav-link{
-    
-      font-size: 2.5rem;       
+    text-align: center;
+    font-size: var(--p_min) ;
   }
-  .container{
-    margin-top: 150px;
-    max-width: 100%;
+  .container {
+    max-width: var(--max_width); /* Largura menor para mobile */
   }
   
-    body {
-        font-size: 1.9rem; /* Fonte um pouco menor em telas pequenas */
-    }
-    
-    .navbar-toggler-icon{
-      width: 4em;
-      height: 4em;
-    }
-    
-}
-
-
-/* Para telas muito grandes (desktops maiores) */
-
-@media (min-width: 1200px) {
-  .nav-link{   
-      font-size: 1.4rem;       
   }
+
+  
+@media (min-width: 992px) {
+  
+h1 {
+  font-size: var(--h1_medium); /* Tamanho menor para mobile */
 }
+h2 {
+    font-size: var(--h2_medium); 
+}
+p {
+  font-size: var(--p_medium); 
+}
+
+.container {
+  max-width: var(--max_width); 
+}
+
+}
+
+
+
+  @media (min-width: 1200px) {
+    h1 {
+      font-size: var(--h1_max); 
+    }
+      h2 {
+      font-size: var(--h2_max); 
+    }
+    p {
+      font-size: var(--p_max);
+    }
+     .container {
+      max-width: var(--minimum_width); 
+     }
+     .nav-link{
+      text-align: center;
+      font-size: var(--link-font-default);
+    }
+  }
+  

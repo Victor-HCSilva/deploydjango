@@ -38,6 +38,9 @@
                   <a class="nav-link header_links" href="{% url 'gestao_de_pacientes' id=user.id %}">Pacientes</a>
                 </li>
                 <li class="nav-item">
+                  <a class="nav-link header_links" href="{% url 'portal_do_paciente' id=user.id %}">Portal do paciente</a>
+                </li>
+                <li class="nav-item">
                   <a class="nav-link header_links" href="{% url 'logout' %}">Sair</a>
                 </li>
               {% else %}

@@ -10,12 +10,15 @@
 
 
 <div id="div-ola-name" style="text-indent: 60px;">
-    <strong><p>Olá, {{ name }}</p></strong>
+    <strong><p class="p_min">Olá, {{ name }}</p></strong>
 </div>
 
 <div class="titulo_portal_do_paciente">
-    <div class="titulo">
+    <div class="text-center" >
         <h1>Portal do paciente</h1>
+        <br>
+        <br>
+        <br>
     </div>
     <div class="main">
       <div class="container">
@@ -37,8 +40,9 @@
               {% endif %}
               
               {% if paciente.is_staff %}
-                  <a class="nav-link" href="{% url 'gestao_de_pacientes' id=paciente.id %}">Pacientes</a>
-                  <a class="nav-link" href="{% url 'gestao_de_medicos' id=paciente.id %}">Médicos</a>
+                  <a class="nav-link link-any" href="{% url 'gestao_de_pacientes' id=paciente.id %}">Pacientes</a>
+                  <br>
+                  <a class="nav-link link-any" href="{% url 'gestao_de_medicos' id=paciente.id %}">Médicos</a>
               {% endif %}
               
           </nav>
@@ -46,13 +50,16 @@
           <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="lista_de_medicos" role="tabpanel"
                    aria-labelledby="lista-de-medicos-tab">
-                  <h3>Médicos disponíveis</h3>
-    
+                  <h3 class="h1_min text-center">Médicos disponíveis</h3>
+                <br>
+                <br>
+                <br>
+
                    <form method="get" class="mb-3">
                     <div class="row">
                          <div class="col-md-6">
                              <div class="input-group">
-                                  <input type="text" class="form-control" name="search"
+                                  <input class="mini_size" type="text" class="form-control" name="search"
                                          placeholder="Pesquisar médico por nome" value="{{ search_term }}">
                                       <div class="input-group-append">
                                            <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
@@ -62,7 +69,7 @@
                       <div class="col-md-6">
                          <div class="input-group">
                                    <select class="form-control" name="specialty">
-                                       <option value="">Todas as especialidades</option>
+                                       <option class="mini_size" value="">Todas as especialidades</option>
                                       {% for specialty in specialties %}
                                           <option value="{{ specialty.nome }}" {% if specialty_term == specialty.nome %}selected{% endif %}>
                                               {{ specialty.nome }}
@@ -80,18 +87,18 @@
                   <table class="table table-striped">
                       <thead>
                       <tr>
-                          <th>Nome</th>
-                          <th>Especialidade</th>
-                          <th>CRM</th>
+                          <th class="p_min">Nome</th>
+                          <th class="p_min">Especialidade</th>
+                          <th class="p_min">CRM</th>
                       </tr>
                       </thead>
                       <tbody>
                       {% if medicos %}
                           {% for medico in medicos %}
                               <tr>
-                                  <td>{{ medico.nome }}</td>
-                                  <td>{{ medico.especialidade }}</td>
-                                  <td>{{ medico.crm }}</td>
+                                  <td class="mini_size">{{ medico.nome }}</td>
+                                  <td class="mini_size">{{ medico.especialidade }}</td>
+                                  <td class="mini_size">{{ medico.crm }}</td>
                               </tr>
                           {% endfor %}
                       {% else %}
@@ -108,14 +115,14 @@
                               <a class="page-link"
                                  href="?page=1{% if search_term %}&search={{ search_term }}{% endif %}{% if specialty_term %}&specialty={{ specialty_term }}{% endif %}"
                                  aria-label="First">
-                                  <span aria-hidden="true">« Primeira</span>
+                                  <span class="mini_size" aria-hidden="true">« Primeira</span>
                               </a>
                           </li>
                           <li class="page-item">
                               <a class="page-link"
                                  href="?page={{ medicos.previous_page_number }}{% if search_term %}&search={{ search_term }}{% endif %}{% if specialty_term %}&specialty={{ specialty_term }}{% endif %}"
                                  aria-label="Previous">
-                                  <span aria-hidden="true">‹ Anterior</span>
+                                  <span class="mini_size" aria-hidden="true">‹ Anterior</span>
                               </a>
                           </li>
                       {% endif %}

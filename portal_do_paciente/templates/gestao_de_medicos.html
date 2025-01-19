@@ -10,47 +10,50 @@
     <link rel="stylesheet" href="{% static 'css/portal_do_paciente/style_gerenciar_medicos.css' %}">
     <script src="{% static 'js/js_gerenciar_medicos.js' %}" defer></script>
 </head>
-<body>
+<body >
     
     <div class="container">
         {{ message }}
-        <h1>Médicos</h1>
-        
+        <h1 class="h1_max">Gerir Médicos</h1>
+        <br>
+
         <form method="get" class="mb-3">
             <div class="row">
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="search_cpf" placeholder="Buscar por CPF" value="{{ search_term }}">
+                    <input class="mini_size" type="text" class="form-control" name="search_cpf" placeholder="Buscar por CPF" value="{{ search_term }}">
+                    <br>
                 </div>
                 <div class="col-md-2">
-                    <button type="submit" class="btn btn-sm btn-primary">Pesquisar</button>
+                    <button class="mini_size" type="submit" class="btn btn-sm btn-primary">Pesquisar</button>
                 </div>
             </div>
             
-            <h2>Lista de Médicos</h2>
+            <h2 class="h1_min text-center">Lista</h2>
+            <br><br>
         <table class="table table-striped">
             <thead>
                 <tr>
-                <th scope="col">Nome</th>
-                <th scope="col">Email</th>
-                <th scope="col">Data de Nascimento</th>
-                <th scope="col">CPF</th>
-                <th scope="col">CRM</th>
-                <th scope="col">Especialidade</th>
-                <th scope="col">Editar</th>
-                <th scope="col">Excluir</th>
+                <th class="special mini_size" scope="col">Nome</th>
+                <th class="special mini_size" scope="col">Email</th>
+                <th class="special mini_size" scope="col">Data de Nascimento</th>
+                <th class="p_min mini_size" scope="col">CPF</th>
+                <th class="special mini_size" scope="col">CRM</th>
+                <th class="special mini_size" scope="col">Especialidade</th>
+                <th class="p_min mini_size" scope="col">Editar</th>
+                <th class="p_min mini_size" scope="col">Excluir</th>
                 </tr>
             </thead>
             <tbody>
             {% for medico in medicos %}
             <tr>
-                <td>{{ medico.nome }}</td>
-                <td>{{ medico.email }}</td>
-                <td>{{ medico.data_de_nascimento|date:"d/m/Y" }}</td>
-                <td>{{ medico.cpf }}</td>
-                <td>{{ medico.crm }}</td>
-                <td>{{ medico.especialidade }}</td>
-                <td><a class="btn btn-sm btn-secondary" href="{% url 'editar_medico' id_medico=medico.id id_adm=id %}">Editar</a></td>
-                <td><a class="btn btn-sm btn-danger" href="{% url 'remover_medico' id_medico=medico.id id_adm=id %}">Excluir</a></td>
+                <td class="special mini_size">{{ medico.nome }}</td>
+                <td class="special mini_size">{{ medico.email }}</td>
+                <td class="special mini_size">{{ medico.data_de_nascimento|date:"d/m/Y" }}</td>
+                <td class="mini_size">{{ medico.cpf }}</td>
+                <td class="special mini_size">{{ medico.crm }}</td>
+                <td class="special mini_size" >{{ medico.especialidade }}</td>
+                <td ><a class="btn btn-sm btn-secondary mini_size" href="{% url 'editar_medico' id_medico=medico.id id_adm=id %}">Editar</a></td>
+                <td ><a class="btn btn-sm btn-danger mini_size" href="{% url 'remover_medico' id_medico=medico.id id_adm=id %}">Excluir</a></td>
             </tr>
             {% endfor %}
             </tbody>
@@ -58,11 +61,11 @@
         <div class="pagination">
             <span class="step-links">
                 {% if medicos.has_previous %}
-                    <a href="?page=1{% if search_term %}&search_cpf={{search_term}}{% endif %}">« Primeira</a>
-                    <a href="?page={{ medicos.previous_page_number }}{% if search_term %}&search_cpf={{search_term}}{% endif %}">Anterior</a>
+                    <a class="mini_size" href="?page=1{% if search_term %}&search_cpf={{search_term}}{% endif %}">« Primeira</a>
+                    <a class="mini_size" href="?page={{ medicos.previous_page_number }}{% if search_term %}&search_cpf={{search_term}}{% endif %}">Anterior</a>
                 {% endif %}
         
-                <span class="current">
+                <span class="current mini_size">
                     Página {{ medicos.number }} de {{ medicos.paginator.num_pages }}.
                 </span>
         
@@ -80,43 +83,43 @@
         <form method="post" class="container">
             {% csrf_token %}
             <div class="mb-3">
-                 <div class="mb-3">
+                 <div class="mb-3 h1_max">
                     {{ form.nome.label_tag }}
                     {{ form.nome }}
                     </div>
                 
-                 <div class="mb-3">
+                 <div class="mb-3 h1_max">
                     {{ form.email.label_tag }}
                     {{ form.email }}
                     </div>
 
-                 <div class="mb-3">
+                 <div class="mb-3 h1_max">
                    {{ form.data_de_nascimento.label_tag }}
                    {{ form.data_de_nascimento }}
                  </div>
 
-                 <div class="mb-3">
+                 <div class="mb-3 h1_max">
                     {{ form.cpf.label_tag }}
                     {{ form.cpf }}
                  </div>
 
-                  <div class="mb-3">
+                  <div class="mb-3 h1_max">
                     {{ form.crm.label_tag }}
                     {{ form.crm }}
                   </div>
 
-                 <div class="mb-3">
+                 <div class="mb-3 h1_max">
                      {{ form.especialidade.label_tag }}
                     {{ form.especialidade }}
                  </div>
                     <br>
 
-                 <div class="mb-3">
+                 <div class="mb-3 h1_max">
                      {{ form.password.label_tag }}
                     {{ form.password }}
                     </div>
             </div>
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-primary h1_max">Salvar</button>
         </form>
         <br>
         
