@@ -1,0 +1,51 @@
+@import url('../const/fonts.css'); /* Supondo que este seja o caminho correto */
+
+
+  
+.header_links:hover{
+  transition: var(--transition);
+  background-color: var(--background_links_orange_hover);
+}
+
+@media (min-width: 728px) {
+    .header_links {
+        color: var(--color_links) !important;
+        border-radius: 6px;
+        text-align: center;
+        font-size: 2rem;
+      }  
+     
+    .container{
+        margin-top: 400px !important;
+        margin-left: -20px;
+    }     
+    .card{
+        width: 600px;
+        height: 500px;
+    }
+    
+  }
+
+@media (min-width: 992px) {
+
+}
+
+  @media (min-width: 1200px) {
+    .container{
+        margin-top: 200px !important;
+    }
+    .card{
+        margin-left: 200px ;
+        width: 400px;
+        height: 400px;
+    }
+    .header_links {
+        color: var(--color_links) !important;
+        border-radius: 6px;
+        text-align: center;
+        font-size: 1.2rem;
+      }  
+    
+  }
+  
+
