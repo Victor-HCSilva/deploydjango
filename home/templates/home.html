@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="{% static 'css/home/style_home.css' %}">
   <div class="container">
-    <h1 >Sistema de agendamento e gerenciamento de consultas (SAGe)</h1>
+    <h1 ></h1>
     
     <div class="container">
 
@@ -17,8 +17,9 @@
 
       <p style="color: red"> Os dados são fictícios !  </p>
 
+      {% comment  %}
       <p>Com este sistema, você tem a praticidade de agendar suas consultas de forma rápida e fácil, diretamente do seu computador ou dispositivo móvel.</p>
-  
+ 
       <h2>Aproveite os benefícios:</h2>
   
       <ul>
@@ -31,5 +32,6 @@
       <a class="link-any p_min" href="{% url 'cadastro' %}">Cadastre-se</a>
     </div>
   </div>
+  {% endcomment %}
 
   {% endblock %}
