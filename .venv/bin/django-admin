@@ -1,4 +1,4 @@
-#!/home/victor/sage/.venv/bin/python3
+#!/home/victor/main/deploydjango/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
